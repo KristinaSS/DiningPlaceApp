@@ -12,16 +12,16 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class AccountController {
     @Autowired
-    private AccountTypeRepository employeeRepository;
+    private AccountTypeRepository accountTypeRepository;
 
-    @GetMapping("/employees")
+    @GetMapping("/accountType")
     public List<AccountType> getAllEmployees() {
-        return employeeRepository.findAll();
+        return accountTypeRepository.findAll();
     }
 
-    @PostMapping("/employees")
-    public AccountType createEmployee(@Valid @RequestBody AccountType employee) {
-        return employeeRepository.save(employee);
+    @PostMapping("/accountType")
+    public AccountType createEmployee(@Valid @RequestBody AccountType accountType) {
+        return accountTypeRepository.save(accountType);
     }
 
 
