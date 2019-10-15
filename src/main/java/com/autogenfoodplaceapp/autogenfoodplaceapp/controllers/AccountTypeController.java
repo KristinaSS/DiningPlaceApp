@@ -9,18 +9,18 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
-public class AccountController {
+@RequestMapping("")
+public class AccountTypeController {
     @Autowired
     private AccountTypeRepository accountTypeRepository;
 
-    @GetMapping("/accountType")
-    public List<AccountType> getAllEmployees() {
+    @GetMapping("/c")
+    public List<AccountType> getAllAccountTypes() {
         return accountTypeRepository.findAll();
     }
 
     @PostMapping("/accountType")
-    public AccountType createEmployee(@Valid @RequestBody AccountType accountType) {
+    public AccountType createAccountType(@Valid @RequestBody AccountType accountType) {
         return accountTypeRepository.save(accountType);
     }
 

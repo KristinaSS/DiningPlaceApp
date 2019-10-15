@@ -1,15 +1,21 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.models;
 
+import org.hibernate.service.ServiceRegistry;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "account")
-public class Account {
+public class Account implements Serializable {
     private int accID;
-    private int accTypeID;
-    private String firstName;
-    private String lastName;
+
+
+    private AccountType accountType;
+
+    private String first_name;
+    private String last_name;
     private String email;
     private String password;
 
@@ -21,7 +27,7 @@ public class Account {
             joinColumns = {
                     @JoinColumn(name = "account_id", nullable = false, updatable = false)},
             inverseJoinColumns = {
-                    @JoinColumn(name = "food_place-id", nullable = false, updatable = false)
+                    @JoinColumn(name = "food_place_id", nullable = false, updatable = false)
             })
     public List<Review> getReviewList() {
         return reviewList;
@@ -42,34 +48,35 @@ public class Account {
         this.accID = accID;
     }
 
-    @Basic
-    @Column(name = "account_type_id")
-    public int getAccTypeID() {
-        return accTypeID;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_type_id")
+    public AccountType getAccountType() {
+        return accountType;
     }
 
-    public void setAccTypeID(int accTypeID) {
-        this.accTypeID = accTypeID;
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 
     @Basic
     @Column(name = "first_name")
-    public String getFirstName() {
-        return firstName;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
     @Basic
     @Column(name = "last_name")
-    public String getLastName() {
-        return lastName;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLast_name(String lastName) {
+        this.last_name = lastName;
     }
 
     @Basic

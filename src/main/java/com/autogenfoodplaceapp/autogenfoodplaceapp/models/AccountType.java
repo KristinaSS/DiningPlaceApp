@@ -11,17 +11,17 @@ public class AccountType {
     private String name;
 
 
-    private List<Account> accountList = new ArrayList<>();
+/*    private List<Account> accountList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "account_type_id")
+    @JoinTable(name = "account_type_id")
     public List<Account> getAccountList() {
         return accountList;
     }
 
     public void setAccountList(List<Account> accountList) {
         this.accountList = accountList;
-    }
+    }*/
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
