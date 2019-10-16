@@ -1,7 +1,5 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.models;
 
-import org.hibernate.service.ServiceRegistry;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,11 +11,11 @@ public class Account implements Serializable {
 
 
     private AccountType accountType;
-
-    private String first_name;
-    private String last_name;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
+    private float minRating;
 
     private List<Review> reviewList = new ArrayList<>();
 
@@ -49,7 +47,7 @@ public class Account implements Serializable {
     }
 
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_type_id")
     public AccountType getAccountType() {
         return accountType;
@@ -60,23 +58,23 @@ public class Account implements Serializable {
     }
 
     @Basic
-    @Column(name = "first_name")
-    public String getFirst_name() {
-        return first_name;
+    @Column(name = "firstName")
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     @Basic
-    @Column(name = "last_name")
-    public String getLast_name() {
-        return last_name;
+    @Column(name = "lastName")
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String lastName) {
-        this.last_name = lastName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     @Basic
@@ -97,5 +95,15 @@ public class Account implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Basic
+    @Column(name = "minimum_rating")
+    public float getMinRating() {
+        return minRating;
+    }
+
+    public void setMinRating(float minRating) {
+        this.minRating = minRating;
     }
 }

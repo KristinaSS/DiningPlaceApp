@@ -1,6 +1,7 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.controllers;
 
 import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.AccountRepository;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.AccountTypeRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,9 @@ public class AccountController {
     @Autowired
     private AccountRepository accountRepository;
 
+    @Autowired
+    private AccountTypeRepository accountTypeRepository;
+
     @GetMapping("/account")
     public List<Account> getAllAccounts() {
         return accountRepository.findAll();
@@ -24,11 +28,9 @@ public class AccountController {
     public Account createAccount(@Valid @RequestBody Account account) {
         return accountRepository.save(account);
     }
-}/*{
-
-    "account_type_id": "1",
-    "email": "kristina.stoyanova",
-    "first_name": "Kristina",
-    "last_name": "Stoyanova",
-    "password": "admin"
-}*/
+    @PostMapping("/account/{typeId}")
+    public Account createAccount(@Valid @RequestBody Account account,@PathVariable(value = "typeId") Integer typeId) {
+        account.setAccountType(accountTypeRepository.getOne(typeId));
+        return accountRepository.save(account);
+    }
+}

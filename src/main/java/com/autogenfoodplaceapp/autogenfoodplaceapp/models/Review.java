@@ -3,7 +3,7 @@ package com.autogenfoodplaceapp.autogenfoodplaceapp.models;
 import javax.persistence.*;
 
 @Entity
-public class Review {
+public class Review implements Comparable<Review>{
     private int reviewID;
     private int foodPlaceID;
     private int accountID;
@@ -81,5 +81,10 @@ public class Review {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public int compareTo(Review review) {
+        return Float.compare(this.getOverallRating(), review.getOverallRating());
     }
 }

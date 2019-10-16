@@ -1,5 +1,7 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.controllers;
 
+import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.AccountRepository;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.FoodPlaceRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.ReviewRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.Review;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +16,25 @@ public class ReviewController {
     @Autowired
     private ReviewRepository reviewRepository;
 
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private FoodPlaceRepository foodPlaceRepository;
+
+
     @GetMapping("/reviews")
     public List<Review> getAllAccountTypes() {
         return reviewRepository.findAll();
     }
 
-    @PostMapping("/reviews")
-    public Review createAccountType(@Valid @RequestBody Review review) {
+    @PostMapping("/reviews:acc-{accId}&food-place{foodPlaceId}")
+    public Review createAccountType(@Valid @RequestBody Review review,
+                                    @PathVariable(value = "accId") Integer accID,
+                                    @PathVariable(value = "foodPlaceId") Integer foodPlaceId) {
+        review.setAccountID(accountRepository.getOne(accID).getAccID());
+        review.setFoodPlaceID(foodPlaceRepository.getOne(foodPlaceId).getFoodPlaceID());
+
         return reviewRepository.save(review);
     }
 }

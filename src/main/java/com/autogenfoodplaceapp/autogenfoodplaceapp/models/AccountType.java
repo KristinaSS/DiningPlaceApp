@@ -2,8 +2,6 @@ package com.autogenfoodplaceapp.autogenfoodplaceapp.models;
 
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity(name = "account_type")
 public class AccountType {
