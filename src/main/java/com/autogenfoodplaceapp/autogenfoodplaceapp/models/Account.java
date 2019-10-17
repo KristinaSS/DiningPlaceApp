@@ -1,24 +1,54 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.models;
 
+import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.FoodPlaceRepository;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.ReviewRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity(name = "account")
 public class Account implements Serializable {
     private int accID;
-
-
     private AccountType accountType;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private float minRating;
-
     private List<Review> reviewList = new ArrayList<>();
 
+    @Autowired
+    ReviewRepository reviewRepository;
+    @Autowired
+    FoodPlaceRepository foodPlaceRepository;
+
+    private Map<FoodPlace,Float> foodPlaceRating = new TreeMap<>();
+    {
+        FoodPlace lastFoodPlace = null;
+        FoodPlace currFoodPlace;
+        int numberReviews = 0;
+
+
+        for(Review review: reviewRepository.findAll()) {
+            if (review.getAccountID() != this.getAccID()) continue;
+            currFoodPlace=foodPlaceRepository.getOne(review.getFoodPlaceID());
+            if (lastFoodPlace != null){
+                if(foodPlaceRating.containsKey(lastFoodPlace)){
+                    foodPlaceRating.replace(lastFoodPlace,foodPlaceRating.get(lastFoodPlace)+currFoodPlace.getOverallRating());
+                }else {
+                    foodPlaceRating.replace(lastFoodPlace,(foodPlaceRating.get(lastFoodPlace)/numberReviews));
+                    numberReviews = 0;
+                }
+            }
+            lastFoodPlace = currFoodPlace;
+            numberReviews++;
+
+
+        }
+    }
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "review",
@@ -105,5 +135,9 @@ public class Account implements Serializable {
 
     public void setMinRating(float minRating) {
         this.minRating = minRating;
+    }
+
+    public Map<FoodPlace, Float> getFoodPlaceRating() {
+        return foodPlaceRating;
     }
 }

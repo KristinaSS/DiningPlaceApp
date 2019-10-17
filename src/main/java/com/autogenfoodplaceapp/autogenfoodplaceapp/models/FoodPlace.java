@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "foodplace")
-public class FoodPlace {
+public class FoodPlace implements Comparable<FoodPlace>{
     private int foodPlaceID;
     private String name;
     private String address;
@@ -108,5 +108,10 @@ public class FoodPlace {
 
     public void setOverallRating(float overallRating) {
         this.overallRating = overallRating;
+    }
+
+    @Override
+    public int compareTo(FoodPlace o) {
+        return (this.name.compareTo(o.getName()));
     }
 }

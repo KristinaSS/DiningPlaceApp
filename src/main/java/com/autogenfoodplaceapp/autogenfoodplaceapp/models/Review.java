@@ -85,6 +85,6 @@ public class Review implements Comparable<Review>{
 
     @Override
     public int compareTo(Review review) {
-        return Float.compare(this.getOverallRating(), review.getOverallRating());
+        return Float.compare(this.foodPlaceID, review.getFoodPlaceID());
     }
 }
