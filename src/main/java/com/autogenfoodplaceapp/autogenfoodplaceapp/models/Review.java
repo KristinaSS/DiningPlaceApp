@@ -87,4 +87,17 @@ public class Review implements Comparable<Review>{
     public int compareTo(Review review) {
         return Float.compare(this.foodPlaceID, review.getFoodPlaceID());
     }
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "reviewID=" + reviewID +
+                ", foodPlaceID=" + foodPlaceID +
+                ", accountID=" + accountID +
+                ", foodRating=" + foodRating +
+                ", valueRating=" + valueRating +
+                ", overallRating=" + overallRating +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

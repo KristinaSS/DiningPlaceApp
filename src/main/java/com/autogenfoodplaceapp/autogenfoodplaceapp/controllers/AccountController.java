@@ -2,7 +2,10 @@ package com.autogenfoodplaceapp.autogenfoodplaceapp.controllers;
 
 import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.AccountRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.AccountTypeRepository;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.ReviewRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.Account;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.models.FoodPlace;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.services.AccountServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +21,8 @@ public class AccountController {
 
     @Autowired
     private AccountTypeRepository accountTypeRepository;
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     @GetMapping("/account")
     public List<Account> getAllAccounts() {
@@ -32,5 +37,13 @@ public class AccountController {
     public Account createAccount(@Valid @RequestBody Account account,@PathVariable(value = "typeId") Integer typeId) {
         account.setAccountType(accountTypeRepository.getOne(typeId));
         return accountRepository.save(account);
+    }
+
+    @GetMapping("/account-gen-{AccId}")
+    public FoodPlace generateFoodPlace(@PathVariable(value = "AccId") Integer accID) {
+        Account account = accountRepository.getOne(accID);
+        System.out.println("Size " + reviewRepository.count());
+        System.out.println(account);
+        return new AccountServices().generateFoodPlace(account);
     }
 }
