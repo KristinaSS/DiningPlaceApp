@@ -6,7 +6,7 @@ import java.util.*;
 
 @Entity(name = "account")
 public class Account implements Serializable {
-    private int accID;
+    private Integer accID;
     private AccountType accountType;
     private String firstName;
     private String lastName;
@@ -32,11 +32,11 @@ public class Account implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_id")
-    public int getAccID() {
+    public Integer getAccID() {
         return accID;
     }
 
-    public void setAccID(int accID) {
+    public void setAccID(Integer accID) {
         this.accID = accID;
     }
 
@@ -52,7 +52,7 @@ public class Account implements Serializable {
     }
 
     @Basic
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     public String getFirstName() {
         return firstName;
     }
@@ -62,7 +62,7 @@ public class Account implements Serializable {
     }
 
     @Basic
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     public String getLastName() {
         return lastName;
     }

@@ -6,14 +6,14 @@ import java.util.List;
 
 @Entity(name = "foodplace")
 public class FoodPlace implements Comparable<FoodPlace>{
-    private int foodPlaceID;
+    private Integer foodPlaceID;
     private String name;
     private String address;
     private String telephone;
     private String linkToWebsite;
-    private float foodRating;
-    private float valueRating;
-    private float overallRating;
+    private Float foodRating;
+    private Float valueRating;
+    private Float overallRating;
 
 
     private List<Review> reviewList = new ArrayList<>();
@@ -32,11 +32,11 @@ public class FoodPlace implements Comparable<FoodPlace>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "food_place_id")
-    public int getFoodPlaceID() {
+    public Integer getFoodPlaceID() {
         return foodPlaceID;
     }
 
-    public void setFoodPlaceID(int foodPlaceID) {
+    public void setFoodPlaceID(Integer foodPlaceID) {
         this.foodPlaceID = foodPlaceID;
     }
 
@@ -82,31 +82,31 @@ public class FoodPlace implements Comparable<FoodPlace>{
 
     @Basic
     @Column(name = "food_rating")
-    public float getFoodRating() {
+    public Float getFoodRating() {
         return foodRating;
     }
 
-    public void setFoodRating(float foodRating) {
+    public void setFoodRating(Float foodRating) {
         this.foodRating = foodRating;
     }
 
     @Basic
     @Column(name = "value_rating")
-    public float getValueRating() {
+    public Float getValueRating() {
         return valueRating;
     }
 
-    public void setValueRating(float valueRating) {
+    public void setValueRating(Float valueRating) {
         this.valueRating = valueRating;
     }
 
     @Basic
     @Column(name = "overall_rating")
-    public float getOverallRating() {
+    public Float getOverallRating() {
         return overallRating;
     }
 
-    public void setOverallRating(float overallRating) {
+    public void setOverallRating(Float overallRating) {
         this.overallRating = overallRating;
     }
 

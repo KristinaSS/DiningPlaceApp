@@ -21,15 +21,6 @@ import java.util.stream.Collectors;
 import static java.util.Map.Entry.comparingByValue;
 
 public class AccountServices {
-    @Autowired
-    private AccountRepository accountRepository;
-
-    @Autowired
-    private ReviewRepository reviewRepository;
-
-    @Autowired
-    FoodPlaceRepository foodPlaceRepository;
-
     private Map<FoodPlace,Float> foodPlaceRating = new TreeMap<>();
 
     public void fillFoodPlaceRatingMap(Account account){
@@ -37,16 +28,16 @@ public class AccountServices {
         FoodPlace currFoodPlace;
         int numberReviews = 0;
 
-        List<Review> sortedReviewRepository =
-                reviewRepository.findAll().stream().collect(Collectors.toList());
+        //List<Review> sortedReviewRepository = reviewRepository.findAllByReviewIDIsGreaterThan(0);
 
-        Collections.sort(sortedReviewRepository);
+        Collections.sort(AccountController.REVIEWS);
 
-        for(Review review: sortedReviewRepository) {
-            if (review.getAccountID() != account.getAccID()) continue;
-            currFoodPlace=foodPlaceRepository.getOne(review.getFoodPlaceID());
+        for(Review review: AccountController.REVIEWS) {
+            if (!review.getAccountID().equals(account.getAccID())) continue;
+            currFoodPlace= AccountController.FOOD_PLACES.stream().filter(x -> x.getFoodPlaceID().equals(review.getFoodPlaceID())).findFirst().get();
 
             if (lastFoodPlace != null){
+                System.out.println("1");
                 if(foodPlaceRating.containsKey(lastFoodPlace)){
                     foodPlaceRating.replace(lastFoodPlace,foodPlaceRating.get(lastFoodPlace)+review.getOverallRating());
                 }else {
@@ -97,7 +88,7 @@ public class AccountServices {
 
     //not used yet
 
-    public int findAccount(String email){
+/*    public int findAccount(String email){
         for(Account account: accountRepository.findAll()){
             if(account.getEmail().equals(email)){
                 return account.getAccID();
@@ -107,5 +98,5 @@ public class AccountServices {
 
     public boolean isAuthorizedtoEnterAccount(int accID, String password){
         return accountRepository.getOne(accID).getPassword().equals(password);
-    }
+    }*/
 }

@@ -25,7 +25,7 @@ public class ReviewController {
 
     @GetMapping("/reviews")
     public List<Review> getAllAccountTypes() {
-        return reviewRepository.findAll();
+        return reviewRepository.findAllByReviewIDIsGreaterThan(0);
     }
 
     @PostMapping("/reviews:acc-{accId}&food-place{foodPlaceId}")

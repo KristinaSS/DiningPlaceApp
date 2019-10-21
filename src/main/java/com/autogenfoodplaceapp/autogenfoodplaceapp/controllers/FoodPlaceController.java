@@ -13,10 +13,10 @@ import java.util.List;
 @RestController
 @RequestMapping("")
 public class FoodPlaceController {
-    @Autowired
+    @Autowired(required = true)
     private FoodPlaceRepository foodPlaceRepository;
 
-    @GetMapping("/foodPlaceRepository")
+    @GetMapping("/foodPlace")
     public List<FoodPlace> getAllFoodPlaces() {
         return foodPlaceRepository.findAll();
     }
