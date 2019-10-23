@@ -1,8 +1,8 @@
-package com.autogenfoodplaceapp.autogenfoodplaceapp.services;
+package com.autogenfoodplaceapp.autogenfoodplaceapp.services.classes;
 
-import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.AccountTypeRepository;
-import com.autogenfoodplaceapp.autogenfoodplaceapp.models.Account;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.AccountTypeRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.AccountType;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.services.interfaces.IAccountTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

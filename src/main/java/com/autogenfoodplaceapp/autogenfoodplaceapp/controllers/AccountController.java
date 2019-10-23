@@ -1,9 +1,7 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.controllers;
 
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.Account;
-import com.autogenfoodplaceapp.autogenfoodplaceapp.models.FoodPlace;
-import com.autogenfoodplaceapp.autogenfoodplaceapp.services.IAccountService;
-import com.autogenfoodplaceapp.autogenfoodplaceapp.services.AccountService;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.services.interfaces.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

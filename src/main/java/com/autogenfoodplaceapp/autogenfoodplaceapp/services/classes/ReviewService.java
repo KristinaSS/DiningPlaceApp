@@ -1,7 +1,8 @@
-package com.autogenfoodplaceapp.autogenfoodplaceapp.services;
+package com.autogenfoodplaceapp.autogenfoodplaceapp.services.classes;
 
-import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.ReviewRepository;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.ReviewRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.Review;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.services.interfaces.IReviewServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

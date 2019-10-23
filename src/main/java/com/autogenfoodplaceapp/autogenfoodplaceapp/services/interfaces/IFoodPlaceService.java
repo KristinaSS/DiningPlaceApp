@@ -1,4 +1,4 @@
-package com.autogenfoodplaceapp.autogenfoodplaceapp.services;
+package com.autogenfoodplaceapp.autogenfoodplaceapp.services.interfaces;
 
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.AccountType;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.FoodPlace;
@@ -11,4 +11,6 @@ public interface IFoodPlaceService {
     FoodPlace getOne(int Id);
 
     FoodPlace createOne(FoodPlace foodPlace);
+
+    FoodPlace generateFoodPlace(int accID);
 }

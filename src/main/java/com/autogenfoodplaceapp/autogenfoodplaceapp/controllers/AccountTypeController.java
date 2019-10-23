@@ -1,8 +1,7 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.controllers;
 
-import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.AccountTypeRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.AccountType;
-import com.autogenfoodplaceapp.autogenfoodplaceapp.services.IAccountTypeService;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.services.interfaces.IAccountTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

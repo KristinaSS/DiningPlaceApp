@@ -1,10 +1,7 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.controllers;
 
-import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.AccountRepository;
-import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.FoodPlaceRepository;
-import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.ReviewRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.Review;
-import com.autogenfoodplaceapp.autogenfoodplaceapp.services.ReviewService;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.services.classes.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

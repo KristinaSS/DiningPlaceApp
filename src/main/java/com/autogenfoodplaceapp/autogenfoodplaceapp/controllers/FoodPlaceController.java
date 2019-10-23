@@ -1,10 +1,7 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.controllers;
 
-import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.AccountRepository;
-import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.FoodPlaceRepository;
-import com.autogenfoodplaceapp.autogenfoodplaceapp.models.Account;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.FoodPlace;
-import com.autogenfoodplaceapp.autogenfoodplaceapp.services.FoodPlaceServices;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.services.classes.FoodPlaceServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +19,12 @@ public class FoodPlaceController {
         return foodPlaceServices.findAll();
     }
 
-    @PostMapping("/foodPlaceRepository")
+    @PostMapping("/createFoodPlace")
     public FoodPlace createFoodPlace(@Valid @RequestBody FoodPlace foodPlace) {
         return foodPlaceServices.createOne(foodPlace);
+    }
+    @GetMapping("/auto-foodplace-acc-{accID}")
+    public FoodPlace autoGenFoodPlace(@PathVariable(value = "accID") Integer accID){
+        return foodPlaceServices.generateFoodPlace(accID);
     }
 }

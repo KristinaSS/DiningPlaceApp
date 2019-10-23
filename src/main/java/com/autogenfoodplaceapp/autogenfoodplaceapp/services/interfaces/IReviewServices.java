@@ -1,4 +1,4 @@
-package com.autogenfoodplaceapp.autogenfoodplaceapp.services;
+package com.autogenfoodplaceapp.autogenfoodplaceapp.services.interfaces;
 
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.FoodPlace;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.Review;
