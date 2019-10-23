@@ -1,26 +1,44 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.services;
 
 import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.AccountRepository;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.AccountTypeRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.FoodPlaceRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.ReviewRepository;
-import com.autogenfoodplaceapp.autogenfoodplaceapp.controllers.AccountController;
-import com.autogenfoodplaceapp.autogenfoodplaceapp.controllers.FoodPlaceController;
-import com.autogenfoodplaceapp.autogenfoodplaceapp.controllers.ReviewController;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.Account;
-import com.autogenfoodplaceapp.autogenfoodplaceapp.models.FoodPlace;
-import com.autogenfoodplaceapp.autogenfoodplaceapp.models.Review;
-import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.*;
-import java.util.Map.Entry;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import static java.util.Map.Entry.comparingByValue;
 
-public class AccountServices {
+@Service
+public class AccountService implements IAccountService {
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private AccountTypeRepository accountTypeRepository;
+
+    @Override
+    public List<Account> findAll() {
+        return accountRepository.findAll();
+    }
+
+    @Override
+    public Account getOne(int Id) {
+        return accountRepository.getOne(Id);
+    }
+
+    @Override
+    public Account createOne(Account account, int accType) {
+        account.setAccountType(accountTypeRepository.getOne(accType));
+        return accountRepository.save(account);
+    }
+
+
+
+/*
     private Map<FoodPlace,Float> foodPlaceRating = new TreeMap<>();
 
     public void fillFoodPlaceRatingMap(Account account){
@@ -84,7 +102,7 @@ public class AccountServices {
 
     public Map<FoodPlace, Float> getFoodPlaceRating() {
         return foodPlaceRating;
-    }
+    }*/
 
     //not used yet
 

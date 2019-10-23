@@ -8,5 +8,4 @@ import java.util.List;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer> {
-    List<Account> findAccountsByAccIDGreaterThan(int id);
 }

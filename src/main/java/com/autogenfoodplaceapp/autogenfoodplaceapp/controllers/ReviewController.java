@@ -4,6 +4,7 @@ import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.AccountRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.FoodPlaceRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.ReviewRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.Review;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,27 +15,17 @@ import java.util.List;
 @RequestMapping("")
 public class ReviewController {
     @Autowired
-    private ReviewRepository reviewRepository;
-
-    @Autowired
-    private AccountRepository accountRepository;
-
-    @Autowired
-    private FoodPlaceRepository foodPlaceRepository;
-
+    ReviewService reviewService;
 
     @GetMapping("/reviews")
-    public List<Review> getAllAccountTypes() {
-        return reviewRepository.findAllByReviewIDIsGreaterThan(0);
+    public List<Review> getAllReviews() {
+        return reviewService.findAll();
     }
 
     @PostMapping("/reviews:acc-{accId}&food-place{foodPlaceId}")
-    public Review createAccountType(@Valid @RequestBody Review review,
+    public Review createReview(@Valid @RequestBody Review review,
                                     @PathVariable(value = "accId") Integer accID,
                                     @PathVariable(value = "foodPlaceId") Integer foodPlaceId) {
-        review.setAccountID(accountRepository.getOne(accID).getAccID());
-        review.setFoodPlaceID(foodPlaceRepository.getOne(foodPlaceId).getFoodPlaceID());
-
-        return reviewRepository.save(review);
+        return reviewService.createOne(review,foodPlaceId,accID);
     }
 }

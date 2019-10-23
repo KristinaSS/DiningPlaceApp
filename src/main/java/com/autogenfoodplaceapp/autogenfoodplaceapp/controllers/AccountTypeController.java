@@ -2,6 +2,7 @@ package com.autogenfoodplaceapp.autogenfoodplaceapp.controllers;
 
 import com.autogenfoodplaceapp.autogenfoodplaceapp.Repository.AccountTypeRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.AccountType;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.services.IAccountTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,17 +13,15 @@ import java.util.List;
 @RequestMapping("")
 public class AccountTypeController {
     @Autowired
-    private AccountTypeRepository accountTypeRepository;
+    IAccountTypeService accountTypeService;
 
     @GetMapping("/c")
     public List<AccountType> getAllAccountTypes() {
-        return accountTypeRepository.findAll();
+        return accountTypeService.findAll();
     }
 
     @PostMapping("/accountType")
     public AccountType createAccountType(@Valid @RequestBody AccountType accountType) {
-        return accountTypeRepository.save(accountType);
+        return accountTypeService.createOne(accountType);
     }
-
-
 }
