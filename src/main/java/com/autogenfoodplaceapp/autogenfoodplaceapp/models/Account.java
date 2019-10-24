@@ -1,8 +1,11 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "account")
 public class Account implements Serializable {
@@ -14,13 +17,8 @@ public class Account implements Serializable {
     private String password;
     private List<Review> reviewList = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "review",
-            joinColumns = {
-                    @JoinColumn(name = "account_id", nullable = false)},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "food_place_id", nullable = false)
-            })
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "account")
+    @JsonIgnoreProperties("account")
     public List<Review> getReviewList() {
         return reviewList;
     }
@@ -90,6 +88,7 @@ public class Account implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
     @Override
     public String toString() {
         printReviewList();
@@ -103,8 +102,9 @@ public class Account implements Serializable {
                 ", reviewList=" + reviewList.size() +
                 '}';
     }
-    private void printReviewList(){
-        for(Review r: reviewList){
+
+    private void printReviewList() {
+        for (Review r : reviewList) {
             System.out.println(r);
         }
     }

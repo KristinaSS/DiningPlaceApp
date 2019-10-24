@@ -1,7 +1,7 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.services.classes;
 
-import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.AccountTypeRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.AccountType;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.AccountTypeRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.services.interfaces.IAccountTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,5 +26,15 @@ public class AccountTypeService implements IAccountTypeService {
     @Override
     public AccountType createOne(AccountType accountType) {
         return accountTypeRepository.save(accountType);
+    }
+
+    @Override
+    public void deleteByID(int ID) {
+        accountTypeRepository.delete(getOne(ID));
+    }
+
+    @Override
+    public AccountType updateByID(int ID, AccountType accountType) {
+        return null;
     }
 }

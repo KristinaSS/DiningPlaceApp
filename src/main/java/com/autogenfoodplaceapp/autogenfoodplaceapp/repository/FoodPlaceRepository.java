@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FoodPlaceRepository extends JpaRepository<FoodPlace, Integer> {
+    //deleteByFoodPlaceID(Integer foodPlaceID);
+    // Iterable<FoodPlace> deleteByFoodPlaceID(Integer foodPlaceID);
 }

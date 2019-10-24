@@ -1,11 +1,14 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "foodplace")
-public class FoodPlace implements Comparable<FoodPlace>{
+public class FoodPlace implements Comparable<FoodPlace>, Serializable {
     private Integer foodPlaceID;
     private String name;
     private String address;
@@ -19,8 +22,10 @@ public class FoodPlace implements Comparable<FoodPlace>{
     private List<Review> reviewList = new ArrayList<>();
 
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "food_place_id")
+    @OneToMany(cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER, mappedBy = "foodPlace")
+    @JsonIgnoreProperties("foodPlace")
     public List<Review> getReviewList() {
         return reviewList;
     }

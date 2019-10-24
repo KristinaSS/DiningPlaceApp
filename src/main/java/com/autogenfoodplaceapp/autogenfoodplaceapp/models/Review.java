@@ -1,16 +1,16 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.models;
 
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.persistence.*;
 
 @EnableJpaRepositories
 @Entity
-public class Review implements Comparable<Review>{
+public class Review implements Comparable<Review> {
     private Integer reviewID;
-    private Integer foodPlaceID;
-    private Integer accountID;
+    private FoodPlace foodPlace;
+    private Account account;
     private Float foodRating;
     private Float valueRating;
     private Float overallRating;
@@ -27,24 +27,26 @@ public class Review implements Comparable<Review>{
         this.reviewID = reviewID;
     }
 
-    @Basic
-    @Column(name = "food_place_id")
-    public Integer getFoodPlaceID() {
-        return foodPlaceID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "food_place_id", nullable = false)
+    @JsonIgnoreProperties("reviewList")
+    public FoodPlace getFoodPlace() {
+        return foodPlace;
     }
 
-    public void setFoodPlaceID(Integer foodPlaceID) {
-        this.foodPlaceID = foodPlaceID;
+    public void setFoodPlace(FoodPlace foodPlace) {
+        this.foodPlace = foodPlace;
     }
 
-    @Basic
-    @Column(name = "account_id")
-    public Integer getAccountID() {
-        return accountID;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id", nullable = false)
+    @JsonIgnoreProperties("reviewList")
+    public Account getAccount() {
+        return account;
     }
 
-    public void setAccountID(Integer accountID) {
-        this.accountID = accountID;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     @Basic
@@ -89,15 +91,15 @@ public class Review implements Comparable<Review>{
 
     @Override
     public int compareTo(Review review) {
-        return Float.compare(this.foodPlaceID, review.getFoodPlaceID());
+        return Float.compare(this.foodPlace.getFoodPlaceID(), review.getFoodPlace().getFoodPlaceID());
     }
 
     @Override
     public String toString() {
         return "Review{" +
                 "reviewID=" + reviewID +
-                ", foodPlaceID=" + foodPlaceID +
-                ", accountID=" + accountID +
+                ", foodPlaceID=" + foodPlace.getFoodPlaceID() +
+                ", accountID=" + account.getAccID() +
                 ", foodRating=" + foodRating +
                 ", valueRating=" + valueRating +
                 ", overallRating=" + overallRating +
