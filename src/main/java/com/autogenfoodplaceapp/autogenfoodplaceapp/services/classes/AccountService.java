@@ -21,20 +21,31 @@ public class AccountService implements IAccountService {
 
     @Override
     public List<Account> findAll() {
-        System.out.println(accountRepository.findAll().size());
         return accountRepository.findAll();
     }
 
     @Override
     public Account getOne(int Id) {
-        System.out.println(Id);
-        System.out.println(accountRepository.findAll().size());
-        return accountRepository.getOne(Id);
+        return accountRepository.findById(Id)
+                .orElseGet(()->{
+                    try {
+                        throw new ResourceNotFoundException(" A account with this Id has not been found:  "+ Id);
+                    } catch (ResourceNotFoundException e) {
+                        LOGGER.warn("An excetion was thrown "+ e.getClass()+ e.getMessage());
+                    }
+                    return null;
+                });
     }
 
     @Override
     public void deleteByID(int ID) {
-        accountRepository.delete(getOne(ID));
+        Account account = getOne(ID);
+        if(account== null) {
+            LOGGER.warn("No account has been deleted.");
+            return;
+        }
+        accountRepository.delete(account);
+        LOGGER.info("Deleted account with id: "+ID);
     }
 
     @Override
@@ -43,6 +54,7 @@ public class AccountService implements IAccountService {
                 .map(account -> accountRepository.save(updateAccMembers(account,updatedAccount)))
                 .orElseGet(()->{
                     updatedAccount.setAccID(ID);
+                    LOGGER.info("New account has been created with ID: "+ID);
                     return accountRepository.save(updatedAccount);
                 });
     }
@@ -50,6 +62,9 @@ public class AccountService implements IAccountService {
     @Override
     public Account createOne(Account account, int accType) {
         account.setAccountType(accountTypeRepository.getOne(accType));
+
+        LOGGER.info("New account has been created.");
+
         return accountRepository.save(account);
     }
 
@@ -66,6 +81,7 @@ public class AccountService implements IAccountService {
         account.setAccountType(updatedAccount.getAccountType());
         account.setEmail(updatedAccount.getEmail());
         account.setPassword(updatedAccount.getPassword());
+        LOGGER.info("Account Updated");
         return account;
     }
 }

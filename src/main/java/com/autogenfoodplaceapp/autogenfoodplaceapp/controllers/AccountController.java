@@ -35,4 +35,9 @@ public class AccountController {
         return accountService.updateByID(ID,account);
     }
 
+    @DeleteMapping("/delete-account-{accID}")
+    @ResponseStatus(HttpStatus.GONE)
+    public void deleteFoodplace(@PathVariable(value = "accID") Integer accID) {
+        accountService.deleteByID(accID);
+    }
 }

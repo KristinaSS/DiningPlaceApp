@@ -11,6 +11,7 @@ import com.autogenfoodplaceapp.autogenfoodplaceapp.services.interfaces.IFoodPlac
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -33,17 +34,38 @@ public class FoodPlaceServices implements IFoodPlaceService {
 
     @Override
     public FoodPlace getOne(int Id) {
-        return foodPlaceRepository.getOne(Id);
+        return foodPlaceRepository.findById(Id).orElseGet(() -> {
+            try {
+                throw new ResourceNotFoundException("A food place with this Id has not been found:  " + Id);
+            } catch (ResourceNotFoundException e) {
+                LOGGER.warn("An excetion was thrown " + e.getClass() + e.getMessage());
+            }
+            return null;
+        });
     }
 
     @Override
     public FoodPlace createOne(FoodPlace foodPlace) {
+        LOGGER.info("New food place has been created.");
         return foodPlaceRepository.save(foodPlace);
     }
 
     @Override
     public FoodPlace generateFoodPlace(int accID) {
-        Account account = accountRepository.getOne(accID);
+        Account account = accountRepository.findById(accID)
+                .orElseGet(() -> {
+                    try {
+                        throw new ResourceNotFoundException(" A account with this Id has not been found:  " + accID);
+                    } catch (ResourceNotFoundException e) {
+                        LOGGER.warn("An excetion was thrown " + e.getClass() + e.getMessage());
+                    }
+                    return null;
+                });
+
+        if (account == null) {
+            LOGGER.warn("Cannot generate food place.");
+            return null;
+        }
 
         Map<FoodPlace, Float> foodRatings =
                 fillFoodPlaceRatingMap(account, reviewRepository.findAll());
@@ -59,24 +81,31 @@ public class FoodPlaceServices implements IFoodPlaceService {
 
     @Override
     public void deleteByID(int foodPlaceID) {
+        FoodPlace foodPlace = getOne(foodPlaceID);
+        if (foodPlace == null) {
+            LOGGER.warn("No account has been deleted.");
+            return;
+        }
+        LOGGER.info("Deleted food place with id: "+foodPlaceID);
         foodPlaceRepository.delete(getOne(foodPlaceID));
     }
 
     @Override
     public FoodPlace updateByID(int ID, FoodPlace updatedFoodPlace) {
         return foodPlaceRepository.findById(ID)
-                .map(foodPlace -> foodPlaceRepository.save(updatedFoodPlaceMembers(foodPlace,updatedFoodPlace)))
-                .orElseGet(()->{
+                .map(foodPlace -> foodPlaceRepository.save(updatedFoodPlaceMembers(foodPlace, updatedFoodPlace)))
+                .orElseGet(() -> {
                     try {
-                        throw new ResourceNotFoundException("A Food Place with this Id has not been found:  "+ ID);
+                        throw new ResourceNotFoundException("A Food Place with this Id has not been found:  " + ID);
                     } catch (ResourceNotFoundException e) {
-                        e.printStackTrace();
+                        LOGGER.warn("An excetion was thrown " + e.getClass() + e.getMessage());
                     }
                     return null;
                 });
     }
 
-    private Map<FoodPlace, Float> fillFoodPlaceRatingMap(Account account, List<Review> notSortedReviews) {
+    private Map<FoodPlace, Float> fillFoodPlaceRatingMap(@NotNull Account account,
+                                                         @NotNull List<Review> notSortedReviews) {
         FoodPlace lastFoodPlace = null;
         FoodPlace currFoodPlace;
         int numberReviews = 0;
@@ -109,7 +138,7 @@ public class FoodPlaceServices implements IFoodPlaceService {
         return foodPlaceRating;
     }
 
-    private float getSumAllFoodPlaceRatings(Map<FoodPlace, Float> foodPlaceFloatMap) {
+    private float getSumAllFoodPlaceRatings(@NotNull Map<FoodPlace, @NotNull Float> foodPlaceFloatMap) {
         float sumAllValues = 0;
         for (Map.Entry<FoodPlace, Float> entry : foodPlaceFloatMap.entrySet()) {
             sumAllValues += entry.getValue();
@@ -127,11 +156,12 @@ public class FoodPlaceServices implements IFoodPlaceService {
         return null;
     }
 
-    private FoodPlace updatedFoodPlaceMembers(FoodPlace foodPlace, FoodPlace updatedFoodPlace){
+    private FoodPlace updatedFoodPlaceMembers(FoodPlace foodPlace, FoodPlace updatedFoodPlace) {
         foodPlace.setName(updatedFoodPlace.getName());
         foodPlace.setAddress(updatedFoodPlace.getAddress());
         foodPlace.setTelephone(updatedFoodPlace.getTelephone());
         foodPlace.setLinkToWebsite(updatedFoodPlace.getLinkToWebsite());
+        LOGGER.info("Food place updated.");
         return foodPlace;
     }
 }

@@ -27,11 +27,24 @@ public class ReviewService implements IReviewServices {
 
     @Override
     public Review getOne(int Id) {
-        return reviewRepository.getOne(Id);
+        return reviewRepository.findById(Id) .orElseGet(()->{
+            try {
+                throw new ResourceNotFoundException("A review with this Id has not been found:  "+ Id);
+            } catch (ResourceNotFoundException e) {
+                LOGGER.warn("An excetion was thrown "+ e.getClass()+ e.getMessage());
+            }
+            return null;
+        });
     }
 
     @Override
     public void deleteByID(int ID) {
+        Review review = getOne(ID);
+        if(review == null) {
+            LOGGER.warn("No account has been deleted.");
+            return;
+        }
+        LOGGER.info("Deleted review with id: "+ID);
         reviewRepository.delete(getOne(ID));
     }
 
@@ -41,9 +54,9 @@ public class ReviewService implements IReviewServices {
                 .map(review -> reviewRepository.save(updatedFoodPlaceMembers(review,updatedReview)))
                 .orElseGet(()->{
                     try {
-                        throw new ResourceNotFoundException("Review with this Id has not been found:  "+ ID);
+                        throw new ResourceNotFoundException("A review with this Id has not been found:  "+ ID);
                     } catch (ResourceNotFoundException e) {
-                        e.printStackTrace();
+                        LOGGER.warn("An excetion was thrown "+ e.getClass()+ e.getMessage());
                     }
                     return null;
                 });
@@ -54,6 +67,7 @@ public class ReviewService implements IReviewServices {
         review.setFoodRating(updatedReview.getFoodRating());
         review.setValueRating(updatedReview.getValueRating());
         review.setOverallRating(updatedReview.getOverallRating());
+        LOGGER.info("Review updated.");
         return review;
     }
 
@@ -61,6 +75,7 @@ public class ReviewService implements IReviewServices {
     public Review createOne(Review review, int foodPlaceId, int accId) {
         review.setAccount(accountRepository.getOne(accId));
         review.setFoodPlace(foodPlaceRepository.getOne(foodPlaceId));
+        LOGGER.info("New review has been created.");
         return reviewRepository.save(review);
     }
 

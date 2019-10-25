@@ -1,0 +1,14 @@
+[INFO ] 2019-10-25 15:30:43.795 [http-nio-8080-exec-2] Service - New account has been created.
+[INFO ] 2019-10-25 15:31:17.082 [http-nio-8080-exec-4] Service - New account has been created.
+[INFO ] 2019-10-25 15:31:36.940 [http-nio-8080-exec-5] Service - New account has been created.
+[INFO ] 2019-10-25 15:34:11.692 [http-nio-8080-exec-2] Service - New account has been created.
+[INFO ] 2019-10-25 15:37:26.814 [http-nio-8080-exec-9] Service - Deleted food place with id: com.autogenfoodplaceapp.autogenfoodplaceapp.models.FoodPlace@708aa825
+[INFO ] 2019-10-25 15:39:23.656 [http-nio-8080-exec-1] Service - Deleted food place with id: 2
+[INFO ] 2019-10-25 16:45:38.708 [http-nio-8080-exec-1] Service - Deleted account with id: 21
+[WARN ] 2019-10-25 16:46:02.373 [http-nio-8080-exec-3] Service - An excetion was thrown class com.autogenfoodplaceapp.autogenfoodplaceapp.exceptions.ResourceNotFoundException A account with this Id has not been found:  22
+[WARN ] 2019-10-25 16:46:02.374 [http-nio-8080-exec-3] Service - No account has been deleted.
+[WARN ] 2019-10-25 16:46:47.529 [http-nio-8080-exec-4] Service - An excetion was thrown class com.autogenfoodplaceapp.autogenfoodplaceapp.exceptions.ResourceNotFoundException A account with this Id has not been found:  20
+[WARN ] 2019-10-25 16:46:47.530 [http-nio-8080-exec-4] Service - No account has been deleted.
+[WARN ] 2019-10-25 16:48:34.831 [http-nio-8080-exec-7] Service - An excetion was thrown class com.autogenfoodplaceapp.autogenfoodplaceapp.exceptions.ResourceNotFoundException A account with this Id has not been found:  1
+[WARN ] 2019-10-25 16:48:34.832 [http-nio-8080-exec-7] Service - No account has been deleted.
+[INFO ] 2019-10-25 16:48:55.838 [http-nio-8080-exec-8] Service - Deleted account with id: 4

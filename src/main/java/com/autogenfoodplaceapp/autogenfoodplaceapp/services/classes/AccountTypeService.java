@@ -1,5 +1,6 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.services.classes;
 
+import com.autogenfoodplaceapp.autogenfoodplaceapp.exceptions.ResourceNotFoundException;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.AccountType;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.AccountTypeRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.services.interfaces.IAccountTypeService;
@@ -20,21 +21,47 @@ public class AccountTypeService implements IAccountTypeService {
 
     @Override
     public AccountType getOne(int Id) {
-        return accountTypeRepository.getOne(Id);
+        return accountTypeRepository.findById(Id) .orElseGet(()->{
+            try {
+                throw new ResourceNotFoundException("A account type with this Id has not been found:  "+ Id);
+            } catch (ResourceNotFoundException e) {
+                LOGGER.warn("An excetion was thrown "+ e.getClass()+ e.getMessage());
+            }
+            return null;
+        });
     }
 
     @Override
     public AccountType createOne(AccountType accountType) {
+        LOGGER.info("New account type has been created.");
         return accountTypeRepository.save(accountType);
     }
 
     @Override
     public void deleteByID(int ID) {
-        accountTypeRepository.delete(getOne(ID));
+        AccountType accountType = getOne(ID);
+        if(accountType == null) {
+            LOGGER.warn("No account has been deleted.");
+            return;
+        }
+        LOGGER.info("Deleted account type with id: "+ID);
+        accountTypeRepository.delete(accountType);
     }
 
     @Override
-    public AccountType updateByID(int ID, AccountType accountType) {
-        return null;
+    public AccountType updateByID(int ID, AccountType updatedAccountType) {
+        return accountTypeRepository.findById(ID)
+                .map(accountType -> accountTypeRepository.save(updateAccountTypeMembers(accountType,updatedAccountType)))
+                .orElseGet(()->{
+                    updatedAccountType.setAccountTypeID(ID);
+                    LOGGER.info("New account has been created with ID: "+ID);
+                    return accountTypeRepository.save(updatedAccountType);
+                });
+    }
+
+    private AccountType updateAccountTypeMembers(AccountType accountType, AccountType updatedAccountType){
+        accountType.setName(updatedAccountType.getName());
+        LOGGER.info("Account type updated.");
+        return accountType;
     }
 }
