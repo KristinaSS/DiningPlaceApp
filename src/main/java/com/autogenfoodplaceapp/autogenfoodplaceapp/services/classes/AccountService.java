@@ -5,12 +5,14 @@ import com.autogenfoodplaceapp.autogenfoodplaceapp.models.Account;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.AccountRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.AccountTypeRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.services.interfaces.IAccountService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Log4j2
 @Service
 public class AccountService implements IAccountService {
     @Autowired
@@ -31,7 +33,7 @@ public class AccountService implements IAccountService {
                     try {
                         throw new ResourceNotFoundException(" A account with this Id has not been found:  "+ Id);
                     } catch (ResourceNotFoundException e) {
-                        LOGGER.warn("An excetion was thrown "+ e.getClass()+ e.getMessage());
+                        log.warn("An excetion was thrown "+ e.getClass()+ e.getMessage());
                     }
                     return null;
                 });
@@ -41,11 +43,11 @@ public class AccountService implements IAccountService {
     public void deleteByID(int ID) {
         Account account = getOne(ID);
         if(account== null) {
-            LOGGER.warn("No account has been deleted.");
+            log.warn("No account has been deleted.");
             return;
         }
         accountRepository.delete(account);
-        LOGGER.info("Deleted account with id: "+ID);
+        log.info("Deleted account with id: "+ID);
     }
 
     @Override
@@ -54,7 +56,7 @@ public class AccountService implements IAccountService {
                 .map(account -> accountRepository.save(updateAccMembers(account,updatedAccount)))
                 .orElseGet(()->{
                     updatedAccount.setAccID(ID);
-                    LOGGER.info("New account has been created with ID: "+ID);
+                    log.info("New account has been created with ID: "+ID);
                     return accountRepository.save(updatedAccount);
                 });
     }
@@ -63,7 +65,7 @@ public class AccountService implements IAccountService {
     public Account createOne(Account account, int accType) {
         account.setAccountType(accountTypeRepository.getOne(accType));
 
-        LOGGER.info("New account has been created.");
+        log.info("New account has been created.");
 
         return accountRepository.save(account);
     }
@@ -81,7 +83,7 @@ public class AccountService implements IAccountService {
         account.setAccountType(updatedAccount.getAccountType());
         account.setEmail(updatedAccount.getEmail());
         account.setPassword(updatedAccount.getPassword());
-        LOGGER.info("Account Updated");
+        log.info("Account Updated");
         return account;
     }
 }

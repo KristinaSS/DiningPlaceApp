@@ -8,6 +8,7 @@ import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.AccountRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.FoodPlaceRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.ReviewRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.services.interfaces.IFoodPlaceService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import java.util.Random;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+@Log4j2
 @Service
 public class FoodPlaceServices implements IFoodPlaceService {
     @Autowired
@@ -38,7 +40,7 @@ public class FoodPlaceServices implements IFoodPlaceService {
             try {
                 throw new ResourceNotFoundException("A food place with this Id has not been found:  " + Id);
             } catch (ResourceNotFoundException e) {
-                LOGGER.warn("An excetion was thrown " + e.getClass() + e.getMessage());
+                log.warn("An excetion was thrown " + e.getClass() + e.getMessage());
             }
             return null;
         });
@@ -46,7 +48,7 @@ public class FoodPlaceServices implements IFoodPlaceService {
 
     @Override
     public FoodPlace createOne(FoodPlace foodPlace) {
-        LOGGER.info("New food place has been created.");
+        log.info("New food place has been created.");
         return foodPlaceRepository.save(foodPlace);
     }
 
@@ -57,13 +59,13 @@ public class FoodPlaceServices implements IFoodPlaceService {
                     try {
                         throw new ResourceNotFoundException(" A account with this Id has not been found:  " + accID);
                     } catch (ResourceNotFoundException e) {
-                        LOGGER.warn("An excetion was thrown " + e.getClass() + e.getMessage());
+                        log.warn("An excetion was thrown " + e.getClass() + e.getMessage());
                     }
                     return null;
                 });
 
         if (account == null) {
-            LOGGER.warn("Cannot generate food place.");
+            log.warn("Cannot generate food place.");
             return null;
         }
 
@@ -83,10 +85,10 @@ public class FoodPlaceServices implements IFoodPlaceService {
     public void deleteByID(int foodPlaceID) {
         FoodPlace foodPlace = getOne(foodPlaceID);
         if (foodPlace == null) {
-            LOGGER.warn("No account has been deleted.");
+            log.warn("No account has been deleted.");
             return;
         }
-        LOGGER.info("Deleted food place with id: "+foodPlaceID);
+        log.info("Deleted food place with id: "+foodPlaceID);
         foodPlaceRepository.delete(getOne(foodPlaceID));
     }
 
@@ -98,7 +100,7 @@ public class FoodPlaceServices implements IFoodPlaceService {
                     try {
                         throw new ResourceNotFoundException("A Food Place with this Id has not been found:  " + ID);
                     } catch (ResourceNotFoundException e) {
-                        LOGGER.warn("An excetion was thrown " + e.getClass() + e.getMessage());
+                        log.warn("An excetion was thrown " + e.getClass() + e.getMessage());
                     }
                     return null;
                 });
@@ -161,7 +163,7 @@ public class FoodPlaceServices implements IFoodPlaceService {
         foodPlace.setAddress(updatedFoodPlace.getAddress());
         foodPlace.setTelephone(updatedFoodPlace.getTelephone());
         foodPlace.setLinkToWebsite(updatedFoodPlace.getLinkToWebsite());
-        LOGGER.info("Food place updated.");
+        log.info("Food place updated.");
         return foodPlace;
     }
 }

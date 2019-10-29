@@ -1,11 +1,24 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.models;
 
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
+@ToString
 @Entity(name = "account_type")
 public class AccountType {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "account_type_id")
     private int accountTypeID;
+
+    @Basic
+    @Column(name = "name")
     private String name;
 
 
@@ -20,25 +33,4 @@ public class AccountType {
     public void setAccountList(List<Account> accountList) {
         this.accountList = accountList;
     }*/
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "account_type_id")
-    public int getAccountTypeID() {
-        return accountTypeID;
-    }
-
-    public void setAccountTypeID(int accountTypeID) {
-        this.accountTypeID = accountTypeID;
-    }
-
-    @Basic
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

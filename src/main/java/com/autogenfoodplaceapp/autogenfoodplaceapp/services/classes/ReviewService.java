@@ -6,11 +6,12 @@ import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.AccountRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.FoodPlaceRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.ReviewRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.services.interfaces.IReviewServices;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Log4j2
 @Service
 public class ReviewService implements IReviewServices {
     @Autowired
@@ -31,7 +32,7 @@ public class ReviewService implements IReviewServices {
             try {
                 throw new ResourceNotFoundException("A review with this Id has not been found:  "+ Id);
             } catch (ResourceNotFoundException e) {
-                LOGGER.warn("An excetion was thrown "+ e.getClass()+ e.getMessage());
+                log.warn("An excetion was thrown "+ e.getClass()+ e.getMessage());
             }
             return null;
         });
@@ -41,10 +42,10 @@ public class ReviewService implements IReviewServices {
     public void deleteByID(int ID) {
         Review review = getOne(ID);
         if(review == null) {
-            LOGGER.warn("No account has been deleted.");
+            log.warn("No account has been deleted.");
             return;
         }
-        LOGGER.info("Deleted review with id: "+ID);
+        log.info("Deleted review with id: "+ID);
         reviewRepository.delete(getOne(ID));
     }
 
@@ -56,7 +57,7 @@ public class ReviewService implements IReviewServices {
                     try {
                         throw new ResourceNotFoundException("A review with this Id has not been found:  "+ ID);
                     } catch (ResourceNotFoundException e) {
-                        LOGGER.warn("An excetion was thrown "+ e.getClass()+ e.getMessage());
+                        log.warn("An excetion was thrown "+ e.getClass()+ e.getMessage());
                     }
                     return null;
                 });
@@ -67,7 +68,7 @@ public class ReviewService implements IReviewServices {
         review.setFoodRating(updatedReview.getFoodRating());
         review.setValueRating(updatedReview.getValueRating());
         review.setOverallRating(updatedReview.getOverallRating());
-        LOGGER.info("Review updated.");
+        log.info("Review updated.");
         return review;
     }
 
@@ -75,7 +76,7 @@ public class ReviewService implements IReviewServices {
     public Review createOne(Review review, int foodPlaceId, int accId) {
         review.setAccount(accountRepository.getOne(accId));
         review.setFoodPlace(foodPlaceRepository.getOne(foodPlaceId));
-        LOGGER.info("New review has been created.");
+        log.info("New review has been created.");
         return reviewRepository.save(review);
     }
 

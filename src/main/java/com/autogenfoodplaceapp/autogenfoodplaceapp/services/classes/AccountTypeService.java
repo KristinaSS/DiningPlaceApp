@@ -4,11 +4,13 @@ import com.autogenfoodplaceapp.autogenfoodplaceapp.exceptions.ResourceNotFoundEx
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.AccountType;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.AccountTypeRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.services.interfaces.IAccountTypeService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Log4j2
 @Service
 public class AccountTypeService implements IAccountTypeService {
     @Autowired
@@ -25,7 +27,7 @@ public class AccountTypeService implements IAccountTypeService {
             try {
                 throw new ResourceNotFoundException("A account type with this Id has not been found:  "+ Id);
             } catch (ResourceNotFoundException e) {
-                LOGGER.warn("An excetion was thrown "+ e.getClass()+ e.getMessage());
+                log.warn("An excetion was thrown "+ e.getClass()+ e.getMessage());
             }
             return null;
         });
@@ -33,7 +35,7 @@ public class AccountTypeService implements IAccountTypeService {
 
     @Override
     public AccountType createOne(AccountType accountType) {
-        LOGGER.info("New account type has been created.");
+        log.info("New account type has been created.");
         return accountTypeRepository.save(accountType);
     }
 
@@ -41,10 +43,10 @@ public class AccountTypeService implements IAccountTypeService {
     public void deleteByID(int ID) {
         AccountType accountType = getOne(ID);
         if(accountType == null) {
-            LOGGER.warn("No account has been deleted.");
+            log.warn("No account has been deleted.");
             return;
         }
-        LOGGER.info("Deleted account type with id: "+ID);
+        log.info("Deleted account type with id: "+ID);
         accountTypeRepository.delete(accountType);
     }
 
@@ -54,14 +56,14 @@ public class AccountTypeService implements IAccountTypeService {
                 .map(accountType -> accountTypeRepository.save(updateAccountTypeMembers(accountType,updatedAccountType)))
                 .orElseGet(()->{
                     updatedAccountType.setAccountTypeID(ID);
-                    LOGGER.info("New account has been created with ID: "+ID);
+                    log.info("New account has been created with ID: "+ID);
                     return accountTypeRepository.save(updatedAccountType);
                 });
     }
 
     private AccountType updateAccountTypeMembers(AccountType accountType, AccountType updatedAccountType){
         accountType.setName(updatedAccountType.getName());
-        LOGGER.info("Account type updated.");
+        log.info("Account type updated.");
         return accountType;
     }
 }
