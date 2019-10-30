@@ -1,6 +1,7 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.services.classes;
 
-import com.autogenfoodplaceapp.autogenfoodplaceapp.exceptions.ResourceNotFoundException;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.exceptions.EntityNotFoundException;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.models.FoodPlace;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.Review;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.AccountRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.FoodPlaceRepository;
@@ -8,6 +9,7 @@ import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.ReviewRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.services.interfaces.IReviewServices;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,9 +32,9 @@ public class ReviewService implements IReviewServices {
     public Review getOne(int Id) {
         return reviewRepository.findById(Id) .orElseGet(()->{
             try {
-                throw new ResourceNotFoundException("A review with this Id has not been found:  "+ Id);
-            } catch (ResourceNotFoundException e) {
-                log.warn("An excetion was thrown "+ e.getClass()+ e.getMessage());
+                throw new EntityNotFoundException(Review.class);
+            } catch (EntityNotFoundException e) {
+                log.warn("A review with this Id has not been found:  {}", Id);
             }
             return null;
         });
@@ -42,10 +44,14 @@ public class ReviewService implements IReviewServices {
     public void deleteByID(int ID) {
         Review review = getOne(ID);
         if(review == null) {
-            log.warn("No account has been deleted.");
+            try {
+                throw new EntityNotFoundException(Review.class);
+            } catch (EntityNotFoundException e) {
+                log.warn("A review with this Id has not been found:  {}", ID);
+            }
             return;
         }
-        log.info("Deleted review with id: "+ID);
+        log.info("Deleted review with id: {}",ID);
         reviewRepository.delete(getOne(ID));
     }
 
@@ -55,9 +61,9 @@ public class ReviewService implements IReviewServices {
                 .map(review -> reviewRepository.save(updatedFoodPlaceMembers(review,updatedReview)))
                 .orElseGet(()->{
                     try {
-                        throw new ResourceNotFoundException("A review with this Id has not been found:  "+ ID);
-                    } catch (ResourceNotFoundException e) {
-                        log.warn("An excetion was thrown "+ e.getClass()+ e.getMessage());
+                        throw new EntityNotFoundException(Review.class);
+                    } catch (EntityNotFoundException e) {
+                        log.warn("A review with this Id has not been found:  {}", ID);
                     }
                     return null;
                 });
@@ -68,7 +74,7 @@ public class ReviewService implements IReviewServices {
         review.setFoodRating(updatedReview.getFoodRating());
         review.setValueRating(updatedReview.getValueRating());
         review.setOverallRating(updatedReview.getOverallRating());
-        log.info("Review updated.");
+        log.info("Review updated: {}", review);
         return review;
     }
 
@@ -76,7 +82,7 @@ public class ReviewService implements IReviewServices {
     public Review createOne(Review review, int foodPlaceId, int accId) {
         review.setAccount(accountRepository.getOne(accId));
         review.setFoodPlace(foodPlaceRepository.getOne(foodPlaceId));
-        log.info("New review has been created.");
+        log.info("New review has been created: {}", review);
         return reviewRepository.save(review);
     }
 

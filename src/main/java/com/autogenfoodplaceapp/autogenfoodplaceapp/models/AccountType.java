@@ -6,19 +6,27 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @ToString
 @Entity(name = "account_type")
-public class AccountType {
+public class AccountType implements Serializable {
+
+    private static final long serialVersionUID = 3521498010964665376L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_type_id")
     private int accountTypeID;
 
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
+    @NotNull
+    @Size(min = 4, max = 50)
     private String name;
 
 

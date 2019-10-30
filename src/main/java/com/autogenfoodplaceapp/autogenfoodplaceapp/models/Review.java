@@ -7,13 +7,18 @@ import lombok.ToString;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @ToString
-@EnableJpaRepositories
 @Entity
-public class Review implements Comparable<Review> {
+public class Review implements Comparable<Review>, Serializable {
+
+    private static final long serialVersionUID = 6500913273453295006L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
@@ -30,15 +35,18 @@ public class Review implements Comparable<Review> {
     private Account account;
 
     @Basic
-    @Column(name = "food_rating")
+    @Column(name = "food_rating", nullable = false)
+    @NotNull
     private Float foodRating;
 
     @Basic
-    @Column(name = "value_rating")
+    @Column(name = "value_rating", nullable = false)
+    @NotNull
     private Float valueRating;
 
     @Basic
-    @Column(name = "overal_rating")
+    @Column(name = "overal_rating", nullable = false)
+    @NotNull
     private Float overallRating;
 
     @Basic

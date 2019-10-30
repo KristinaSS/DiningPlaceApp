@@ -6,6 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,9 @@ import java.util.List;
 @ToString
 @Entity(name = "foodplace")
 public class FoodPlace implements Comparable<FoodPlace>, Serializable {
+
+    private static final long serialVersionUID = -3321850516259460195L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "food_place_id")
@@ -22,10 +27,14 @@ public class FoodPlace implements Comparable<FoodPlace>, Serializable {
 
     @Basic
     @Column(name = "name")
+    @NotNull
+    @Size(min = 4, max = 50)
     private String name;
 
     @Basic
     @Column(name = "address")
+    @NotNull
+    @Size(min = 4, max = 50)
     private String address;
 
     @Basic

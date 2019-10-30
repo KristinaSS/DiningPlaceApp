@@ -1,7 +1,8 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.services.classes;
 
-import com.autogenfoodplaceapp.autogenfoodplaceapp.exceptions.ResourceNotFoundException;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.exceptions.EntityNotFoundException;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.Account;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.models.AccountType;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.FoodPlace;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.Review;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.AccountRepository;
@@ -10,6 +11,7 @@ import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.ReviewRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.services.interfaces.IFoodPlaceService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
@@ -38,9 +40,9 @@ public class FoodPlaceServices implements IFoodPlaceService {
     public FoodPlace getOne(int Id) {
         return foodPlaceRepository.findById(Id).orElseGet(() -> {
             try {
-                throw new ResourceNotFoundException("A food place with this Id has not been found:  " + Id);
-            } catch (ResourceNotFoundException e) {
-                log.warn("An excetion was thrown " + e.getClass() + e.getMessage());
+                throw new EntityNotFoundException(FoodPlace.class);
+            } catch (EntityNotFoundException e) {
+                log.warn("A food place with this Id has not been found:  {}", Id);
             }
             return null;
         });
@@ -48,7 +50,7 @@ public class FoodPlaceServices implements IFoodPlaceService {
 
     @Override
     public FoodPlace createOne(FoodPlace foodPlace) {
-        log.info("New food place has been created.");
+        log.info("New food place has been created: {}", foodPlace);
         return foodPlaceRepository.save(foodPlace);
     }
 
@@ -57,9 +59,9 @@ public class FoodPlaceServices implements IFoodPlaceService {
         Account account = accountRepository.findById(accID)
                 .orElseGet(() -> {
                     try {
-                        throw new ResourceNotFoundException(" A account with this Id has not been found:  " + accID);
-                    } catch (ResourceNotFoundException e) {
-                        log.warn("An excetion was thrown " + e.getClass() + e.getMessage());
+                        throw new EntityNotFoundException(Account.class);
+                    } catch (EntityNotFoundException e) {
+                        log.warn(" A account with this Id has not been found: {}", accID);
                     }
                     return null;
                 });
@@ -85,10 +87,14 @@ public class FoodPlaceServices implements IFoodPlaceService {
     public void deleteByID(int foodPlaceID) {
         FoodPlace foodPlace = getOne(foodPlaceID);
         if (foodPlace == null) {
-            log.warn("No account has been deleted.");
+            try {
+                throw new EntityNotFoundException(FoodPlace.class);
+            } catch (EntityNotFoundException e) {
+                log.warn("A food place with this Id has not been found:  {}", foodPlaceID);
+            }
             return;
         }
-        log.info("Deleted food place with id: "+foodPlaceID);
+        log.info("Deleted food place with id: {}",foodPlaceID);
         foodPlaceRepository.delete(getOne(foodPlaceID));
     }
 
@@ -98,9 +104,9 @@ public class FoodPlaceServices implements IFoodPlaceService {
                 .map(foodPlace -> foodPlaceRepository.save(updatedFoodPlaceMembers(foodPlace, updatedFoodPlace)))
                 .orElseGet(() -> {
                     try {
-                        throw new ResourceNotFoundException("A Food Place with this Id has not been found:  " + ID);
-                    } catch (ResourceNotFoundException e) {
-                        log.warn("An excetion was thrown " + e.getClass() + e.getMessage());
+                        throw new EntityNotFoundException(FoodPlace.class);
+                    } catch (EntityNotFoundException e) {
+                        log.warn("A Food Place with this Id has not been found: {}" ,ID);
                     }
                     return null;
                 });
@@ -163,7 +169,7 @@ public class FoodPlaceServices implements IFoodPlaceService {
         foodPlace.setAddress(updatedFoodPlace.getAddress());
         foodPlace.setTelephone(updatedFoodPlace.getTelephone());
         foodPlace.setLinkToWebsite(updatedFoodPlace.getLinkToWebsite());
-        log.info("Food place updated.");
+        log.info("Food place updated: {}", foodPlace);
         return foodPlace;
     }
 }
