@@ -1,0 +1,30 @@
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Link To Website</th>
+        <th scope="col">Food Rating</th>
+        <th scope="col">Value Rating</th>
+        <th scope="col">Overall Rating</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let diningPlace of diningPlaces">
+        <td>{{ diningPlace.foodPlaceID}}</td>
+        <td>{{ diningPlace.name }}</td>
+        <td>{{ diningPlace.address }}</td>
+        <td>{{ diningPlace.telephone }}</td>
+        <td>{{ diningPlace.linkToWebsite }}</td>
+        <td>{{ diningPlace.foodRating }}</td>
+        <td>{{ diningPlace.valueRating }}</td>
+        <td>{{ diningPlace.overallRating }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

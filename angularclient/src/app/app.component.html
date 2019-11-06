@@ -1,20 +1,44 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="site-wrapper">
+  <div class="header-wrapper">
+    <ul class="header-bar">
+      <li class="logo">
+        <div style="left:-30px;" class="musala_logo">
+          <img src="https://www.openhabfoundation.org/logos/musala-soft.png"
+               alt="musala-logo"
+               id="musala-logo"
+               width
+                 ="45"
+               height
+                 ="45">
+        </div>
+      </li>
+      <li class="dining-places-link" style="font-weight: bold; margin-left: 30px; padding-bottom:0">
+        <a [routerLink]= ['/diningPlaces']>Dining Places</a></li>
+      <li style="float:right"><a class="sign-up-link">Sign Up</a></li>
+      <li style="float:right"><a class="login-link">Login</a></li>
+    </ul>
+  </div>
+  <div class="Text-wrapper">
+    <br>
+    <div class="title" style="text-align:center">
+      <h1>
+        {{ title }}
+      </h1>
+    </div>
+    <div class="text" style="text-align: center">
+      <p>
+        Hello fellow Musala colleagues, are you struggling to decide where to eat and its almost if not already
+        lunchtime? Then you have come to the right place! Just click on the generate button to randomly generate
+        a place to eat!<br>
+        <br>
+        Abrakadabra! Problem Solved!
+      </p>
+    </div>
+    <div class="generate-btn-wrapper">
+      <button type="button" (click)=onclickGenButton() class="generate-btn">
+        Generate!
+      </button>
+    </div>
+    <br> <br>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-

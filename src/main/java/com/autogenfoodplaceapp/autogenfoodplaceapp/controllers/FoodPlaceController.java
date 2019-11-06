@@ -12,39 +12,40 @@ import java.util.List;
 
 @Log4j2
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("")
 public class FoodPlaceController {
     @Autowired
     FoodPlaceServices foodPlaceServices;
 
-    @GetMapping("/foodPlace")
+    @GetMapping("/diningPlaces")
     @ResponseStatus(HttpStatus.OK)
     public List<FoodPlace> getAllFoodPlaces() {
         log.debug("REST request to get all FoodPlaces");
         return foodPlaceServices.findAll();
     }
 
-    @PostMapping("/createFoodPlace")
+    @PostMapping("/createDiningPlace")
     @ResponseStatus(HttpStatus.CREATED)
     public FoodPlace createFoodPlace(@Valid @RequestBody FoodPlace foodPlace) {
         log.debug("REST request to save FoodPlace : {}", foodPlace);
         return foodPlaceServices.createOne(foodPlace);
     }
 
-    @GetMapping("/auto-foodplace-acc-{accID}")
+    @GetMapping("/auto-diningPlace-acc-{accID}")
     @ResponseStatus(HttpStatus.OK)
     public FoodPlace autoGenFoodPlace(@PathVariable(value = "accID") Integer accID) {
         log.debug("REST request to get generated FoodPlace from Account : {}", accID);
         return foodPlaceServices.generateFoodPlace(accID);
     }
 
-    @DeleteMapping("/delete-foodplace-{fpID}")
+    @DeleteMapping("/delete-diningPlace-{fpID}")
     @ResponseStatus(HttpStatus.GONE)
-    public void deleteFoodplace(@PathVariable(value = "fpID") Integer foodPlaceID) {
+    public void deleteFoodPlace(@PathVariable(value = "fpID") Integer foodPlaceID) {
         log.debug("REST request to delete FoodPlace : {}", foodPlaceID);
         foodPlaceServices.deleteByID(foodPlaceID);
     }
-    @PutMapping("/edit-foodplace-{fpID}")
+    @PutMapping("/edit-diningPlace-{fpID}")
     @ResponseStatus(HttpStatus.OK)
     public FoodPlace updateAccount(@PathVariable(value = "fpID") Integer ID,
                                  @Valid @RequestBody FoodPlace foodPlace){

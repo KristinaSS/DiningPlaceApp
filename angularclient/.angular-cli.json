@@ -19,9 +19,14 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "C:/Users/kristina.stoyanova/Desktop/auto-gen-food-place-app/angularclient/node_modules/bootstrap/dist/css/bootstrap.min.css"
       ],
-      "scripts": [],
+      "scripts": [
+       "C:/Users/kristina.stoyanova/Desktop/auto-gen-food-place-app/angularclient/node_modules/jquery/dist/jquery.slim.min.js",
+        "C:/Users/kristina.stoyanova/Desktop/auto-gen-food-place-app/angularclient/node_modules/popper.js/dist/umd/popper.min.js",
+        "C:/Users/kristina.stoyanova/Desktop/auto-gen-food-place-app/angularclient/node_modules/bootstrap/dist/js/bootstrap.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

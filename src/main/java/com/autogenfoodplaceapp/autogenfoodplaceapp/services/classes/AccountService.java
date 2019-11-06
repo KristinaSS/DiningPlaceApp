@@ -2,6 +2,7 @@ package com.autogenfoodplaceapp.autogenfoodplaceapp.services.classes;
 
 import com.autogenfoodplaceapp.autogenfoodplaceapp.exceptions.EntityNotFoundException;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.Account;
+import com.autogenfoodplaceapp.autogenfoodplaceapp.models.AccountType;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.AccountRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.repository.AccountTypeRepository;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.services.interfaces.IAccountService;
@@ -69,7 +70,13 @@ public class AccountService implements IAccountService {
 
     @Override
     public Account createOne(Account account, int accType) {
-        account.setAccountType(accountTypeRepository.getOne(accType));
+        AccountType accountType = accountTypeRepository.getOne(accType);
+
+        Account hashedPasswordAcc = new Account();
+
+        updateAccMembers(hashedPasswordAcc,account);
+        hashedPasswordAcc.setAccountType(accountType);
+
 
         log.debug("New account has been created: {}", account);
 
@@ -88,7 +95,7 @@ public class AccountService implements IAccountService {
         account.setLastName(updatedAccount.getLastName());
         account.setAccountType(updatedAccount.getAccountType());
         account.setEmail(updatedAccount.getEmail());
-        account.setPassword(MD5.getHashString(updatedAccount.getPassword()));
+        account.setPassword(updatedAccount.getPassword());
         log.info("Account Updated: {}", account);
         return account;
     }
