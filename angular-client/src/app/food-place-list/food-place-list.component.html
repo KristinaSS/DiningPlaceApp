@@ -1,0 +1,36 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Employee List</h2>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Telephone</th>
+        <th>Link To Website</th>
+        <th>Food Rating</th>
+        <th>Value Rating</th>
+        <th>Overall Rating</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let foodPlace of foodPlaces | async">
+        <td>{{foodPlace.foodPlaceID}}</td>
+        <td>{{foodPlace.name}}</td>
+        <td>{{foodPlace.address}}</td>
+        <td>{{foodPlace.telephone}}</td>
+        <td>{{foodPlace.linkToWebsite}}</td>
+        <td>{{foodPlace.foodRating}}</td>
+        <td>{{foodPlace.valueRating}}</td>
+        <td>{{foodPlace.overallRating}}</td>
+        <td><button (click)="deleteFoodPlace(foodPlace.foodPlaceID)" class="btn btn-danger">Delete</button>
+          <button (click)="foodPlaceDetails(foodPlace.foodPlaceID)" class="btn btn-info" style="margin-left: 10px">Details</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

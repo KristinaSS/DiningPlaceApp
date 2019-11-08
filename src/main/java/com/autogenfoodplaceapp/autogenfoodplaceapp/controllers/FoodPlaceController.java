@@ -13,7 +13,7 @@ import java.util.List;
 @Log4j2
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("")
+@RequestMapping("/dining")
 public class FoodPlaceController {
     @Autowired
     FoodPlaceServices foodPlaceServices;
@@ -51,5 +51,12 @@ public class FoodPlaceController {
                                  @Valid @RequestBody FoodPlace foodPlace){
         log.debug("REST request to update FoodPlace : {}", ID);
         return foodPlaceServices.updateByID(ID,foodPlace);
+    }
+
+    @GetMapping("/get-diningPlace-{ID}")
+    @ResponseStatus(HttpStatus.OK)
+    public FoodPlace getFoodPlace(@PathVariable(value = "ID") Integer fpID) {
+        log.debug("REST request to get FoodPlace: {}", fpID);
+        return foodPlaceServices.getOne(fpID);
     }
 }
