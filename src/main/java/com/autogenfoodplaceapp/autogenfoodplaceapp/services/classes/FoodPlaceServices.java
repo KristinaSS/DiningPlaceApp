@@ -51,6 +51,9 @@ public class FoodPlaceServices implements IFoodPlaceService {
     @Override
     public FoodPlace createOne(FoodPlace foodPlace) {
         log.info("New food place has been created: {}", foodPlace);
+        foodPlace.setFoodRating(0f);
+        foodPlace.setValueRating(0f);
+        foodPlace.setOverallRating(0f);
         return foodPlaceRepository.save(foodPlace);
     }
 
