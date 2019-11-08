@@ -12,8 +12,7 @@ import java.util.List;
 
 @Log4j2
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/dining")
+@RequestMapping("/api/v1/dining")
 public class FoodPlaceController {
     @Autowired
     FoodPlaceServices foodPlaceServices;
