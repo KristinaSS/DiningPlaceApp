@@ -5,13 +5,11 @@
       <th>Address</th>
       <th>Telephone</th>
       <th>Link To Website</th>
-      <th>Food Rating</th>
-      <th>Value Rating</th>
-      <th>Overall Rating</th>
     </tr>
     <tr *ngFor="let foodPlace of foodPlaces">
       <td>
-        {{foodPlace.name}}
+        <a [routerLink]="['/admin/view-food-place',foodPlace.foodPlaceID]">{{foodPlace.name}}</a>
+       <!-- {{foodPlace.name}}-->
       </td>
       <td>
         {{foodPlace.address}}
@@ -21,15 +19,6 @@
       </td>
       <td>
         {{foodPlace.linkToWebsite}}
-      </td>
-      <td>
-        {{foodPlace.foodRating}}
-      </td>
-      <td>
-        {{foodPlace.valueRating}}
-      </td>
-      <td>
-        {{foodPlace.overallRating}}
       </td>
     </tr>
   </table>

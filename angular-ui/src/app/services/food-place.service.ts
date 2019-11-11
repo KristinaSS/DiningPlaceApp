@@ -14,7 +14,7 @@ export class FoodPlaceService {
   getAllFoodPlaces() {
     return this.http.get('server/api/v1/dining/diningPlaces');
   }
-  getFoodPlaceByID(id: number) {
+  getFoodPlace(id: number) {
     return this.http.get('server/api/v1/dining/get-diningPlace-' + id);
   }
   createFoodPlace(foodPlace) {

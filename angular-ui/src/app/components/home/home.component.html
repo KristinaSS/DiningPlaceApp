@@ -1,24 +1,44 @@
-<div class="container">
-  <form [formGroup]="foodPlaceForm" (ngSubmit)="submitRegistration()" novalidate>
-    <div *ngIf="validMessage != ''">
-      <h3 class="has-info">{{validMessage}}</h3>
+<div class="site-wrapper">
+  <div class="header-wrapper">
+    <ul class="header-bar">
+      <li class="logo">
+        <div style="left:-30px;" class="musala_logo">
+          <img src="https://www.openhabfoundation.org/logos/musala-soft.png"
+               alt="musala-logo"
+               id="musala-logo"
+               width
+                 ="45"
+               height
+                 ="45">
+        </div>
+      </li>
+      <li class="dining-places-link" style="font-weight: bold; margin-left: 30px; padding-bottom:0">
+        <a [routerLink]= ['/diningPlaces']>Dining Places</a></li>
+      <li style="float:right"><a class="sign-up-link">Sign Up</a></li>
+      <li style="float:right"><a class="login-link">Login</a></li>
+    </ul>
+  </div>
+  <div class="Text-wrapper">
+    <br>
+    <div class="title" style="text-align:center">
+      <h1>
+        {{ title }}
+      </h1>
     </div>
-    <div class="form-group">
-      <label>Dining Place Name</label>
-      <input type="text" class="form-control" formControlName="name" required autofocus/>
+    <div class="text" style="text-align: center">
+      <p>
+        Hello fellow Musala colleagues, are you struggling to decide where to eat and its almost if not already
+        lunchtime? Then you have come to the right place! Just click on the generate button to randomly generate
+        a place to eat!<br>
+        <br>
+        Abrakadabra! Problem Solved!
+      </p>
     </div>
-    <div class="form-group">
-      <label>Address</label>
-      <input type="email" class="form-control" formControlName="address" required/>
+    <div class="generate-btn-wrapper">
+      <button type="button" class="generate-btn">
+        Generate!
+      </button>
     </div>
-    <div class="form-group">
-      <label>Phone</label>
-      <input type="text" class="form-control" formControlName="telephone" required/>
-    </div>
-    <div class="form-group">
-      <label>Link To Website</label>
-      <input type="text" class="form-control" formControlName="linkToWebsite" required/>
-    </div>
-    <button type="submit" class="btn btn-primary" >Submit</button>
-  </form>
+    <br> <br>
+  </div>
 </div>

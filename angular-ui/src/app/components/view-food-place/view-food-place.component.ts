@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-
 import {FoodPlaceService} from '../../services/food-place.service';
 
 @Component({
@@ -17,7 +16,7 @@ export class ViewFoodPlaceComponent implements OnInit {
     this.getFoodPlaceByID(this.route.snapshot.params.id);
   }
   getFoodPlaceByID(id: number) {
-    this.foodPlaceService.getFoodPlaceByID(id).subscribe(
+    this.foodPlaceService.getFoodPlace(id).subscribe(
       data => {this.foodPlace = data;
       },
       error => console.error(error),
@@ -26,3 +25,4 @@ export class ViewFoodPlaceComponent implements OnInit {
   }
 
 }
+

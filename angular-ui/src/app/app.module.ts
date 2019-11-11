@@ -9,6 +9,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import {AppRoutingModule} from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { ViewFoodPlaceComponent } from './components/view-food-place/view-food-place.component';
+import { CreateFoodPlaceComponent } from './components/create-food-place/create-food-place.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ViewFoodPlaceComponent } from './components/view-food-place/view-food-p
     AdminComponent,
     HomeComponent,
     ViewFoodPlaceComponent,
+    CreateFoodPlaceComponent,
   ],
   imports: [
     BrowserModule,
