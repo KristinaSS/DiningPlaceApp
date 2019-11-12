@@ -4,11 +4,12 @@ import {FoodPlaceService} from '../../services/food-place.service';
 
 @Component({
   selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  templateUrl: './dining-places-list.component.html',
+  styleUrls: ['./dining-places-list.component.css']
 })
-export class AdminComponent implements OnInit {
+export class DiningPlacesListComponent implements OnInit {
   public foodPlaces;
+  title = 'All Dining Places';
 
   constructor(private foodPlaceService: FoodPlaceService) { }
 

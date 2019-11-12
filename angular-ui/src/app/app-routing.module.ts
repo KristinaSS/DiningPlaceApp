@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
-import {AdminComponent} from './components/admin/admin.component';
+import {DiningPlacesListComponent} from './components/dining-places-list/dining-places-list.component';
 import {HomeComponent} from './components/home/home.component';
 import {ViewFoodPlaceComponent} from './components/view-food-place/view-food-place.component';
 import {AppComponent} from './app.component';
@@ -9,15 +9,15 @@ import {AppComponent} from './app.component';
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent
+    component: HomeComponent
   },
   {
-    path: 'admin/view-food-place/:id',
+    path: 'dining-places-list/view-food-place/:id',
     component: ViewFoodPlaceComponent
   },
   {
-    path: 'admin',
-    component: AdminComponent
+    path: 'dining-places-list/dining-places',
+    component: DiningPlacesListComponent
   }
   ];
 

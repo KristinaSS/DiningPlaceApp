@@ -11,6 +11,7 @@ import {Observable} from 'rxjs';
 export class CreateFoodPlaceComponent implements OnInit {
   foodPlaceForm: FormGroup;
   validMessage: string = '';
+  title: 'Create Dining Place';
 
   constructor(private foodPlaceService: FoodPlaceService) {
   }

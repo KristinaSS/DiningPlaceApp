@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Random Dining Place Generator';
+/*  title: string;
+
+  constructor() {
+    this.title = 'Auto Generated Food Place App';
+  }*/
 }

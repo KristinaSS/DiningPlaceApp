@@ -31,3 +31,7 @@ li a:hover {
   margin-top: 10px;
   padding-bottom: 5px;
 }
+.header-wrapper{
+ position: relative;
+  z-index: 1;
+}
