@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {FoodPlaceService} from '../../services/food-place.service';
+import {FoodPlaceService} from '../../../services/food-place.service';
 
 @Component({
   selector: 'app-admin',

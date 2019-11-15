@@ -5,12 +5,15 @@ import {ReactiveFormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import {FoodPlaceService} from './services/food-place.service';
-import { DiningPlacesListComponent } from './components/dining-places-list/dining-places-list.component';
+import { DiningPlacesListComponent } from './components/dining-places/dining-places-list/dining-places-list.component';
 import {AppRoutingModule} from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
-import { ViewFoodPlaceComponent } from './components/view-food-place/view-food-place.component';
-import { CreateFoodPlaceComponent } from './components/create-food-place/create-food-place.component';
+import { ViewFoodPlaceComponent } from './components/dining-places/view-food-place/view-food-place.component';
+import { CreateFoodPlaceComponent } from './components/dining-places/create-food-place/create-food-place.component';
 import { HeaderComponent } from './components/header/header.component';
+import { AcountListComponent } from './components/account/acount-list/acount-list.component';
+import { CreateAccountComponent } from './components/account/create-account/create-account.component';
+import { AccountViewComponent } from './components/account/account-view/account-view.component';
 
 
 @NgModule({
@@ -21,6 +24,9 @@ import { HeaderComponent } from './components/header/header.component';
     ViewFoodPlaceComponent,
     CreateFoodPlaceComponent,
     HeaderComponent,
+    AcountListComponent,
+    CreateAccountComponent,
+    AccountViewComponent,
   ],
   imports: [
     BrowserModule,

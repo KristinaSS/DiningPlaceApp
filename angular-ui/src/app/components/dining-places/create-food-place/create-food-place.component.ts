@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FoodPlaceService} from '../../services/food-place.service';
+import {FoodPlaceService} from '../../../services/food-place.service';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 
@@ -9,9 +9,9 @@ import {Observable} from 'rxjs';
   styleUrls: ['./create-food-place.component.css']
 })
 export class CreateFoodPlaceComponent implements OnInit {
+  title: 'Create Dining Place';
   foodPlaceForm: FormGroup;
   validMessage: string = '';
-  title: 'Create Dining Place';
 
   constructor(private foodPlaceService: FoodPlaceService) {
   }

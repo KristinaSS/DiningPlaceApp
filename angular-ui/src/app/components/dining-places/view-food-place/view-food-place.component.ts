@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {FoodPlaceService} from '../../services/food-place.service';
+import {FoodPlaceService} from '../../../services/food-place.service';
 
 @Component({
   selector: 'app-view-food-place',

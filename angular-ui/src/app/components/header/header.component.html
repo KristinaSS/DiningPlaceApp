@@ -12,11 +12,23 @@
              [routerLink]="['']">
       </div>
     </li>
-    <li class="dining-places-link" style="font-weight: bold; margin-left: 30px; padding-bottom:0">
-      <a [routerLink]="['dining-places-list/dining-places']" class="get-all-dining-link" >Dining Places</a>
+    <li class="dining-places-dropdown" style="font-weight: bold; margin-left: 30px; padding-bottom:0 ">
+      <button class="dropdown-btn" style="font-weight: bold;">
+        Dining Places
+      </button>
+      <div class="dropdown-content">
+        <a [routerLink]="['dining-place/create']" class="create-food-place-link">Create</a>
+        <a [routerLink]="['dining-places-list/dining-places']" class="get-all-dining-link">All</a>
+      </div>
     </li>
-    <li class="accounts-link" style="font-weight: bold; margin-left: 0; padding-bottom:0">
-      <a class="get-all-accounts-link" >Accounts</a>
+    <li class="account-dropdown" style="font-weight: bold; margin-left: 30px; padding-bottom:0 ">
+      <button class="dropdown-acc-btn" style="font-weight: bold;">
+        Accounts
+      </button>
+      <div class="dropdown-acc-content">
+        <a [routerLink]="['account/create']" class="create-acc-link">Create</a>
+        <a [routerLink]="['account/account-list']" class="get-all-acc-link">All</a>
+      </div>
     </li>
     <li style="float:right">
       <a class="sign-up-link">Sign Up</a>
