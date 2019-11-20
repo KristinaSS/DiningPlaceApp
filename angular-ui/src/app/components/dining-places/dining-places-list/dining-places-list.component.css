@@ -19,6 +19,7 @@
   background-image: url("https://www.tropical-islands.de/fileadmin/_processed_/6/6/csm_TI_RESTAURANT_PALMBEACH4_RGB_2000x860_add5f54263.jpg");
   background-repeat: no-repeat;
   background-color: black;
+  background-attachment: revert;
   height: 100vh;
   background-position: center;
   background-size: cover;

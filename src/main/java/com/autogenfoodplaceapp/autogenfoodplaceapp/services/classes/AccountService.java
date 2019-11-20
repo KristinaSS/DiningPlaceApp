@@ -70,17 +70,18 @@ public class AccountService implements IAccountService {
 
     @Override
     public Account createOne(Account account, int accType) {
-        AccountType accountType = accountTypeRepository.getOne(accType);
 
+        AccountType accountType = accountTypeRepository.getOne(accType);
         Account hashedPasswordAcc = new Account();
 
         updateAccMembers(hashedPasswordAcc,account);
         hashedPasswordAcc.setAccountType(accountType);
 
+        System.out.println("Enter 6" + hashedPasswordAcc.toString());
 
-        log.debug("New account has been created: {}", account);
+        log.debug("New account has been created: {}", hashedPasswordAcc);
 
-        return accountRepository.save(account);
+        return accountRepository.save(hashedPasswordAcc);
     }
 
     //todo fix this
@@ -90,13 +91,13 @@ public class AccountService implements IAccountService {
         return null;
     }
 
-    private Account updateAccMembers (@NotNull Account account, @NotNull Account updatedAccount){
-        account.setFirstName(updatedAccount.getFirstName());
-        account.setLastName(updatedAccount.getLastName());
-        account.setAccountType(updatedAccount.getAccountType());
-        account.setEmail(updatedAccount.getEmail());
-        account.setPassword(updatedAccount.getPassword());
-        log.info("Account Updated: {}", account);
-        return account;
+    private Account updateAccMembers (@NotNull Account hashPassAcc, @NotNull Account updatedAccount){
+        hashPassAcc.setFirstName(updatedAccount.getFirstName());
+        hashPassAcc.setLastName(updatedAccount.getLastName());
+        hashPassAcc.setAccountType(updatedAccount.getAccountType());
+        hashPassAcc.setEmail(updatedAccount.getEmail());
+        hashPassAcc.setPassword(updatedAccount.getPassword());
+        log.info("Account Updated: {}", hashPassAcc);
+        return hashPassAcc;
     }
 }

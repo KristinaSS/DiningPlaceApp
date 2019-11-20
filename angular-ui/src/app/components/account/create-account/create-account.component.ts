@@ -13,9 +13,13 @@ import {AccountTypeServiceService} from '../../../services/account-type-service.
 export class CreateAccountComponent implements OnInit {
   title: 'Create  Account';
   accountForm: FormGroup;
+  accountTypeForm: FormGroup;
   validMessage: string = '';
-  accountTypeID: number;
-  accountTypes: object = this.accountTypeServiceService.getAllAccountTypes();
+  accountTypeID: string;
+  accountTypes: AccountType[] = [
+    {id: '1', name: 'admin'},
+    {id: '3', name: 'guest'}
+  ];
 
   constructor(private accountServiceService: AccountServiceService, private accountTypeServiceService: AccountTypeServiceService) {
   }
@@ -25,7 +29,8 @@ export class CreateAccountComponent implements OnInit {
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)});
+    this.accountTypeForm = new FormGroup({
       accountType: new FormControl('', Validators.required)
     });
   }
@@ -46,4 +51,9 @@ export class CreateAccountComponent implements OnInit {
       this.validMessage = 'Please fill out this form before submitting';
     }
   }
+}
+
+export interface AccountType {
+  id: string;
+  name: string;
 }

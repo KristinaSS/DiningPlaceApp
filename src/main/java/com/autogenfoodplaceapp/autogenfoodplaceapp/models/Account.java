@@ -12,77 +12,91 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
 @ToString
 @NoArgsConstructor
 @Entity(name = "account")
 public class Account implements Serializable {
-
-
     private static final long serialVersionUID = 7695450117825003302L;
+
+    private Integer accID;
+    private AccountType accountType;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private transient String password;
+    private List<Review> reviewList = new ArrayList<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_id")
-    private Integer accID;
+    public Integer getAccID() {
+        return accID;
+    }
 
-    @NotNull
+    public void setAccID(Integer accID) {
+        this.accID = accID;
+    }
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_type_id")
-    private AccountType accountType;
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
 
     @Basic
     @Column(name = "first_name")
-    @NotNull
     @Size(min = 4, max = 50)
-    private String firstName;
+    public String getFirstName() {
+        return firstName;
+    }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
     @Basic
     @Column(name = "last_name")
-    @NotNull
     @Size(min = 4, max = 50)
-    private String lastName;
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     @Basic
     @Column(name = "email", nullable = false)
-    @NotNull
     @Size(min = 4, max = 100)
-    private String email;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     @Basic
     @Column(name = "password", nullable = false)
-    @NotNull
     @Size(min = 4, max = 50)
-    private transient String password;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "account")
-    @JsonIgnoreProperties("account")
-    private List<Review> reviewList = new ArrayList<>();
+    public String getPassword() {
+        return password;
+    }
 
     public void setPassword(String password) {
         this.password = MD5.getHashString(password);
     }
 
-    /*    public Account(@NonNull AccountType accountType,
-                   @NonNull String firstName,
-                   @NonNull String lastName,
-                   @NonNull String email,
-                   @NonNull String password) {
-        this.accountType = accountType;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "account")
+    @JsonIgnoreProperties("account")
+    public List<Review> getReviewList() {
+        return reviewList;
     }
 
-    public Account(@NonNull String firstName,
-                   @NonNull String lastName,
-                   @NonNull String email,
-                   @NonNull String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }*/
+    public void setReviewList(List<Review> reviewList) {
+        this.reviewList = reviewList;
+    }
 }

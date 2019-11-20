@@ -18,8 +18,12 @@ export class AccountServiceService {
   getAccount(id: number) {
     return this.http.get('server/account-' + id);
   }
-  createAccount(foodPlace, accountTypeId: number) {
+  createAccount(foodPlace, accountTypeId: string) {
     let body = JSON.stringify(foodPlace);
-    return this.http.post('server/account/' + accountTypeId, body, httpOptions);
+    console.log(body);
+    let accID: string;
+    accID = accountTypeId.substring(1, (accountTypeId.length) - 1).trim();
+    let url = 'server/account/' + accID;
+    return this.http.post(url, body, httpOptions);
   }
 }
