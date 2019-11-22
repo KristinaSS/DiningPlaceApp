@@ -49,7 +49,7 @@ public class AccountController {
     }
 
     @DeleteMapping("/delete-account-{accID}")
-    @ResponseStatus(HttpStatus.GONE)
+    @ResponseStatus(HttpStatus.OK)
     public void deleteFoodplace(@PathVariable(value = "accID") Integer accID) {
         log.debug("REST request to delete Account : {}", accID);
         accountService.deleteByID(accID);

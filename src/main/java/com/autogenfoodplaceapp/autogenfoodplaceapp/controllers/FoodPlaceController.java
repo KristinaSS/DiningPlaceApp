@@ -39,7 +39,7 @@ public class FoodPlaceController {
     }
 
     @DeleteMapping("/delete-diningPlace-{fpID}")
-    @ResponseStatus(HttpStatus.GONE)
+    @ResponseStatus(HttpStatus.OK)
     public void deleteFoodPlace(@PathVariable(value = "fpID") Integer foodPlaceID) {
         log.debug("REST request to delete FoodPlace : {}", foodPlaceID);
         foodPlaceServices.deleteByID(foodPlaceID);

@@ -4,6 +4,7 @@ import {FoodPlaceService} from '../../../services/food-place.service';
 import {Observable} from 'rxjs';
 import {AccountServiceService} from '../../../services/account-service.service';
 import {AccountTypeServiceService} from '../../../services/account-type-service.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-account',
@@ -18,10 +19,12 @@ export class CreateAccountComponent implements OnInit {
   accountTypeID: string;
   accountTypes: AccountType[] = [
     {id: '1', name: 'admin'},
-    {id: '3', name: 'guest'}
+    {id: '2', name: 'guest'}
   ];
 
-  constructor(private accountServiceService: AccountServiceService, private accountTypeServiceService: AccountTypeServiceService) {
+  constructor(private accountServiceService: AccountServiceService,
+              private accountTypeServiceService: AccountTypeServiceService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -47,6 +50,7 @@ export class CreateAccountComponent implements OnInit {
           return Observable.throw(error);
         }
       );
+      /*this.router.navigate(['account/account-list']);*/
     } else {
       this.validMessage = 'Please fill out this form before submitting';
     }

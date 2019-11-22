@@ -1,29 +1,31 @@
 .container-table{
-  padding-top: 20px;
-  padding-right: 10px;
-  padding-left: 10px;
+  position: relative;
+  text-align: center;
+  width: 100%;
 }
 .text-wrap{
-  overflow: hidden;
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background:rgba(255,255,255,0.8);
+  position: relative;
+  margin-top: 70px;
+  margin-bottom: 30px;
+  /*top: 70px;*/
+  background:rgba(250,250,250,0.8);
   padding-right: 10px;
   padding-left: 10px;
+  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+  font-weight: bold;
+  color: black;
 }
 .site-wrapper{
   color: black;
-  background-image: url("https://www.tropical-islands.de/fileadmin/_processed_/6/6/csm_TI_RESTAURANT_PALMBEACH4_RGB_2000x860_add5f54263.jpg");
+  background-image: url(https://www.tropical-islands.de/fileadmin/_processed_/6/6/csm_TI_RESTAURANT_PALMBEACH4_RGB_2000x860_add5f54263.jpg);
   background-repeat: no-repeat;
-  background-color: black;
-  background-attachment: revert;
-  height: 100vh;
+  display: flex;
+  align-items: center;
   background-position: center;
   background-size: cover;
-  position: relative;
-  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
-  font-weight: bold;
+  background-attachment: fixed;
+
+  height: 100vh;
+  justify-content: center;
 }
+

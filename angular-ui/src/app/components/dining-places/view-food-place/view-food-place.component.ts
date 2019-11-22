@@ -23,6 +23,12 @@ export class ViewFoodPlaceComponent implements OnInit {
       () => console.log('Food Place Loaded')
     );
   }
+  deleteFoodPlace() {
+    this.foodPlaceService.deleteFoodPlace(this.foodPlace.foodPlaceID).subscribe(data => {this.foodPlace = data;
+      },
+      error => console.error(error),
+      () => console.log('Food Place Deleted '));
+  }
 
 }
 

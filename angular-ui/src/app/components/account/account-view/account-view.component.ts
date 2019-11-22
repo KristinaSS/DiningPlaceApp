@@ -32,12 +32,13 @@ export class AccountViewComponent implements OnInit {
     );
 
   }
+  deleteAccount() {
+    this.accountServiceService.deleteAccount(this.account.accID).subscribe(
+      data => {
+        this.account = data;
+      },
+      error => console.error(error),
+      () => console.log('Account Deleted')
+    );
+  }
 }
-
-/*        this.accountTypeService.getAccountType(data.accountType).subscribe(accountType => {
-            this.accountServiceService = accountType;
-          },
-          error => console.error(error),
-          () => console.log('Account Loaded')
-        );
-        */

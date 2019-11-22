@@ -15,9 +15,17 @@
         <label>Email: </label>
         <div class="form-control">{{account.email}}</div>
       </div>
-      <div class="row-btn">
-        <a class="btn-back" routerLink="/dining-places-list/dining-places">Back to List</a>
-      </div>
+    </div>
+    <div class="btn-wrapper">
+      <button class="btnz delete-btn" (click)="deleteAccount()" routerLink="/account/account-list">
+        <a>Delete</a>
+      </button>
+      <button class="btnz update-btn">
+        <a>Update</a>
+      </button>
+      <button class="btnz back-btn-wrapper" routerLink="/account/account-list">
+        <a class="btn-back">Back to List</a>
+      </button>
     </div>
   </div>
 </div>

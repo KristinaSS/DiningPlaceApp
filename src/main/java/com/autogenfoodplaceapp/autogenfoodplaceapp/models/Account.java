@@ -37,7 +37,7 @@ public class Account implements Serializable {
         this.accID = accID;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "account_type_id")
     public AccountType getAccountType() {
         return accountType;

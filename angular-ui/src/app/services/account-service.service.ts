@@ -26,4 +26,7 @@ export class AccountServiceService {
     let url = 'server/account/' + accID;
     return this.http.post(url, body, httpOptions);
   }
+  deleteAccount(id: number) {
+    return this.http.delete('server/delete-account-' + id);
+  }
 }

@@ -34,8 +34,16 @@
         <div class="form-control">{{foodPlace.overallRating}}</div>
       </div>
     </div>
-    <div class="row-btn">
-      <a class="btn-back" routerLink="/dining-places-list/dining-places">Back to List</a>
+    <div class="btn-wrapper">
+      <button class="btnz delete-btn" (click)="deleteFoodPlace()" routerLink="/dining-places-list/dining-places">
+        <a>Delete</a>
+      </button>
+      <button class="btnz update-btn">
+        <a>Update</a>
+      </button>
+      <button class="btnz back-btn-wrapper" routerLink="/dining-places-list/dining-places">
+        <a class="btn-back">Back to List</a>
+      </button>
     </div>
   </div>
 </div>

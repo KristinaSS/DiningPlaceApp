@@ -1,3 +1,4 @@
+/*
 .sign-up-link, .login-link {
   background-color: seagreen;
   font-weight: bold;
@@ -31,3 +32,10 @@ li a:hover {
   margin-top: 10px;
   padding-bottom: 5px;
 }
+*/
+/*.header-top{
+  float: top;
+}
+.under-header{
+  float: top;
+}*/

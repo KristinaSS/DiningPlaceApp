@@ -21,4 +21,7 @@ export class FoodPlaceService {
     let body = JSON.stringify(foodPlace);
     return this.http.post('server/api/v1/dining/createDiningPlace', body, httpOptions);
   }
+  deleteFoodPlace(foodPlaceId: number){
+    return this.http.delete('server/api/v1/dining/delete-diningPlace-' + foodPlaceId);
+  }
 }
