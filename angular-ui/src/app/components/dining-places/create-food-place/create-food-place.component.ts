@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FoodPlaceService} from '../../../services/food-place.service';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-food-place',
@@ -13,7 +14,7 @@ export class CreateFoodPlaceComponent implements OnInit {
   foodPlaceForm: FormGroup;
   validMessage: string = '';
 
-  constructor(private foodPlaceService: FoodPlaceService) {
+  constructor(private foodPlaceService: FoodPlaceService, private router: Router) {
   }
 
   ngOnInit() {
@@ -37,6 +38,7 @@ export class CreateFoodPlaceComponent implements OnInit {
           return Observable.throw(error);
         }
       );
+      this.router.navigate(['dining-places-list/dining-places']);
     } else {
       this.validMessage = 'Please fill out this form before submitting';
     }

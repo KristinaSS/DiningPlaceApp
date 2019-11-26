@@ -1,23 +1,36 @@
 <div class="site-wrapper">
   <div class="text-wrap">
     <br>
-    <div class="title-class" style="text-align:center">
+    <div class="title" style="text-align:center">
       <h1>
         {{ title }}
       </h1>
     </div>
-    <div class="container-table">
+    <div class="filter-input">
+      Filter by:
+      <input type="text" [(ngModel)]="listFilter">
+    </div>
+    <div>
+      <div>
+        <h4> Filtered by: {{listFilter}}</h4>
+      </div>
+    </div>
+    <div class="container-table"
+         *ngIf="foodPlaces && foodPlaces.length">
       <table class="table">
+        <thead>
         <tr>
           <th>Name</th>
           <th>Address</th>
           <th>Telephone</th>
           <th>Link To Website</th>
         </tr>
-        <tr *ngFor="let foodPlace of foodPlaces">
+        </thead>
+        <tbody>
+        <tr *ngFor="let foodPlace of filteredFoodPlaces">
           <td>
             <nav>
-            <a [routerLink]="['/dining-places-list/view-food-place',foodPlace.foodPlaceID]">{{foodPlace.name}}</a>
+              <a [routerLink]="['/dining-places-list/view-food-place',foodPlace.foodPlaceID]">{{foodPlace.name}}</a>
             </nav>
           </td>
           <td>
@@ -32,6 +45,7 @@
             </a>
           </td>
         </tr>
+        </tbody>
       </table>
     </div>
   </div>

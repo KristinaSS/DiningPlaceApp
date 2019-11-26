@@ -50,7 +50,7 @@ export class CreateAccountComponent implements OnInit {
           return Observable.throw(error);
         }
       );
-      /*this.router.navigate(['account/account-list']);*/
+      this.router.navigate(['account/account-list']);
     } else {
       this.validMessage = 'Please fill out this form before submitting';
     }

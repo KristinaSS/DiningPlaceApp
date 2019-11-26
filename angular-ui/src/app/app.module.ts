@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import {FoodPlaceService} from './services/food-place.service';
@@ -14,6 +14,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { AcountListComponent } from './components/account/acount-list/acount-list.component';
 import { CreateAccountComponent } from './components/account/create-account/create-account.component';
 import { AccountViewComponent } from './components/account/account-view/account-view.component';
+import { FilterByNamePipe } from './filter-by-name.pipe';
 
 
 @NgModule({
@@ -27,12 +28,14 @@ import { AccountViewComponent } from './components/account/account-view/account-
     AcountListComponent,
     CreateAccountComponent,
     AccountViewComponent,
+    FilterByNamePipe,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [FoodPlaceService],
   bootstrap: [AppComponent]
