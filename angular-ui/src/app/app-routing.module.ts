@@ -9,6 +9,7 @@ import {CreateFoodPlaceComponent} from './components/dining-places/create-food-p
 import {AcountListComponent} from './components/account/acount-list/acount-list.component';
 import {AccountViewComponent} from './components/account/account-view/account-view.component';
 import {CreateAccountComponent} from './components/account/create-account/create-account.component';
+import {RegisterViewComponent} from './register-view/register-view.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     path: 'account/:id',
     component: AccountViewComponent
+  },
+  {
+  path: 'register',
+    component: RegisterViewComponent
   }
   ];
 

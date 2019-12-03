@@ -1,6 +1,4 @@
 package com.autogenfoodplaceapp.autogenfoodplaceapp.controllers;
-
-import com.autogenfoodplaceapp.autogenfoodplaceapp.models.FoodPlace;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.models.Review;
 import com.autogenfoodplaceapp.autogenfoodplaceapp.services.classes.ReviewService;
 import lombok.extern.log4j.Log4j2;

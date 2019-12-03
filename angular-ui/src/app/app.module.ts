@@ -15,6 +15,8 @@ import { AcountListComponent } from './components/account/acount-list/acount-lis
 import { CreateAccountComponent } from './components/account/create-account/create-account.component';
 import { AccountViewComponent } from './components/account/account-view/account-view.component';
 import { FilterByNamePipe } from './filter-by-name.pipe';
+import { RegisterViewComponent } from './register-view/register-view.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -29,6 +31,8 @@ import { FilterByNamePipe } from './filter-by-name.pipe';
     CreateAccountComponent,
     AccountViewComponent,
     FilterByNamePipe,
+    RegisterViewComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
